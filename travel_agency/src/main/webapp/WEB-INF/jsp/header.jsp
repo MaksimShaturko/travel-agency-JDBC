@@ -114,9 +114,6 @@
 						class="nav-submit" type="submit" value="${locale_en}" />
 				</form>
 			</div>
-
-
-
 		</div>
 	</main>
 </body>
