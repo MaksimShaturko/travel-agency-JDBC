@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+body {
+	background-color: #8CDAFF;
+	font-family: "Oswald";
+	margin: 4rem 4rem 4rem 4rem;
+}
+
+.navbar {
+	background-color: #BF4452;
+	height: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 2rem;
+	padding-right: 0.5rem;
+}
+
+.navbar .nav-button {
+	margin-right: 2em;
+}
+
+.navbar .nav-button .nav-submit {
+	background-color: #BF4452;
+	font-family: inherit;
+	border: none;
+	font-size: 18px;
+	color: white;
+}
+
+.navbar .nav-button-last .nav-submit {
+	background-color: #BF4452;
+	font-family: inherit;
+	border: none;
+	font-size: 18px;
+	color: white;
+}
+
+.navbar .nav-button .nav-submit:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.navbar .nav-button-last .nav-submit:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.navbar .nav-button-last {
+	margin-right: 0em;
+}
+
+.navbar .nav-button-space {
+	margin-left: auto;
+}
+
+/*
+https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
+ */
