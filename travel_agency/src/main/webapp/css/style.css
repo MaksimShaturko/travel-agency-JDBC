@@ -56,6 +56,84 @@ body {
 	margin-left: auto;
 }
 
+.main-div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.main-div .auth-div {
+	border: 2px solid white;
+	padding: 20px 30px 30px 20px;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.main-div .auth-div .auth-info-message {
+	font-size: 20px;
+}
+
+.main-div .auth-div .auth-wrong-message {
+	font-size: 10px;
+	margin-top: 10px;
+}
+
+.main-div .auth-div .auth-form {
+	display: flex;
+	margin-top: 10px;
+}
+
+.main-div .auth-input-text {
+	margin-top: 10px;
+	width: 100%;
+	height: 30px;
+	width: 100%;
+}
+
+.auth-form .form-text {
+	margin-top: 10px;
+	font: inherit;
+}
+
+.main-div .auth-div .text {
+	font-size: 20px;
+}
+
+.main-div .text2 {
+	font-size: 20px;
+	align-self: flex-start;
+}
+
+.main-div .text-admin-page {
+	align-self: flex-start;
+}
+
+.auth-form .auth-input-submit {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #FF8694;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.auth-form .auth-input-submit:hover {
+	background-color: #FF233D;
+	cursor: pointer;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /*
 https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
  */

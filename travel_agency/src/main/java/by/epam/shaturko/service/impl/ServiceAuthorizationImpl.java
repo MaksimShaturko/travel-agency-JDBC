@@ -3,13 +3,13 @@ package by.epam.shaturko.service.impl;
 import java.sql.Connection;
 import java.util.Optional;
 
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.AuthorizationDAO;
 import by.epam.shaturko.dao.DAOProvider;
 import by.epam.shaturko.dao.SaveUserDAO;
 import by.epam.shaturko.dao.TransactionalDAO;
 import by.epam.shaturko.dao.exception.DAOException;
 import by.epam.shaturko.dao.exception.TransactionException;
+import by.epam.shaturko.entity.user.User;
 import by.epam.shaturko.service.ServiceAuthorization;
 import by.epam.shaturko.service.exception.ServiceException;
 

@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 import java.time.LocalDateTime;
 
-import by.epam.shaturko.bean.tour.Tour;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.OrderTourDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.Tour;
+import by.epam.shaturko.entity.user.User;
 
 public class OrderTourDAOImpl implements OrderTourDAO {
 	private final static String CREATE_ORDER = "INSERT into travel_agency.tour_orders (user_id, tour_id, confirmation_date, order_status) VALUES(?,?,?,?)";

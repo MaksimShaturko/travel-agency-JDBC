@@ -17,8 +17,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.shaturko.bean.user.User;
-import by.epam.shaturko.bean.user.UserRole;
 import by.epam.shaturko.controller.PagePath;
 import by.epam.shaturko.controller.RequestParameter;
 import by.epam.shaturko.controller.command.Command;
@@ -26,6 +24,8 @@ import by.epam.shaturko.controller.command.CommandName;
 import by.epam.shaturko.controller.command.CommandProvider;
 import by.epam.shaturko.controller.command.RoleAccess;
 import by.epam.shaturko.controller.command.impl.ErrorCommand;
+import by.epam.shaturko.entity.user.User;
+import by.epam.shaturko.entity.user.UserRole;
 
 public class RoleFilter implements Filter{
 	private static final Logger LOGGER = LogManager.getLogger();

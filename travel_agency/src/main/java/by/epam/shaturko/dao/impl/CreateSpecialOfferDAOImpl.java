@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.epam.shaturko.bean.tour.City;
-import by.epam.shaturko.bean.tour.Country;
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.tour.SpecialOffer;
-import by.epam.shaturko.bean.tour.Tour;
 import by.epam.shaturko.dao.ColumnName;
 import by.epam.shaturko.dao.CreateSpecialOfferDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.City;
+import by.epam.shaturko.entity.tour.Country;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.tour.SpecialOffer;
+import by.epam.shaturko.entity.tour.Tour;
 
 public class CreateSpecialOfferDAOImpl implements CreateSpecialOfferDAO {
 	private final static String CREATE_SO = "INSERT into travel_agency.special_offers (title, description, discount) values(?,?,?)";

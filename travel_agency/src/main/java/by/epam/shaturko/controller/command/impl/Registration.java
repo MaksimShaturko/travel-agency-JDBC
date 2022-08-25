@@ -12,12 +12,12 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.shaturko.bean.user.Details;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.controller.Constant;
 import by.epam.shaturko.controller.RequestParameter;
 import by.epam.shaturko.controller.SessionAttribute;
 import by.epam.shaturko.controller.command.Command;
+import by.epam.shaturko.entity.user.Details;
+import by.epam.shaturko.entity.user.User;
 import by.epam.shaturko.service.RegistrationService;
 import by.epam.shaturko.service.ServiceProvider;
 import by.epam.shaturko.service.exception.ServiceException;

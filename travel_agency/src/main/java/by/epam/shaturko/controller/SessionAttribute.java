@@ -1,9 +1,9 @@
 package by.epam.shaturko.controller;
 
-import by.epam.shaturko.bean.tour.Categories;
-import by.epam.shaturko.bean.tour.TypeOfFood;
-import by.epam.shaturko.bean.tour.TypeOfPlacement;
-import by.epam.shaturko.bean.tour.TypeOfRoom;
+import by.epam.shaturko.entity.tour.Categories;
+import by.epam.shaturko.entity.tour.TypeOfFood;
+import by.epam.shaturko.entity.tour.TypeOfPlacement;
+import by.epam.shaturko.entity.tour.TypeOfRoom;
 
 public class SessionAttribute {
 	public static final String LOGIN = "login";

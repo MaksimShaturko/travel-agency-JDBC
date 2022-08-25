@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import by.epam.shaturko.bean.tour.Categories;
-import by.epam.shaturko.bean.tour.City;
-import by.epam.shaturko.bean.tour.Country;
-import by.epam.shaturko.bean.tour.Hotel;
 import by.epam.shaturko.dao.DAOProvider;
 import by.epam.shaturko.dao.FillingDBDAO;
 import by.epam.shaturko.dao.TransactionalDAO;
 import by.epam.shaturko.dao.exception.DAOException;
 import by.epam.shaturko.dao.exception.TransactionException;
+import by.epam.shaturko.entity.tour.Categories;
+import by.epam.shaturko.entity.tour.City;
+import by.epam.shaturko.entity.tour.Country;
+import by.epam.shaturko.entity.tour.Hotel;
 import by.epam.shaturko.service.FillingDBService;
 import by.epam.shaturko.service.exception.ServiceException;
 

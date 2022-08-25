@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import by.epam.shaturko.bean.Message;
-import by.epam.shaturko.bean.tour.Tour;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.SaveMessageDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.Message;
+import by.epam.shaturko.entity.tour.Tour;
+import by.epam.shaturko.entity.user.User;
 
 public class SaveMessageDAOImpl implements SaveMessageDAO{
 	private final static String CREATE_MESSAGE = "INSERT into travel_agency.messages (tour_id, user_id, message, message_time) VALUES (?,?,?,?)";

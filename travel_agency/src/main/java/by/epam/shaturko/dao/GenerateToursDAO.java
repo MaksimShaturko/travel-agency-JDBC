@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.tour.Tour;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.tour.Tour;
 
 public interface GenerateToursDAO {
 	

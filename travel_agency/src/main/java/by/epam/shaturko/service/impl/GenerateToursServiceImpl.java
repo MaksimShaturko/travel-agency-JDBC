@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import by.epam.shaturko.bean.tour.Categories;
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.tour.Tour;
-import by.epam.shaturko.bean.tour.TourStatus;
-import by.epam.shaturko.bean.tour.TypeOfFood;
-import by.epam.shaturko.bean.tour.TypeOfPlacement;
-import by.epam.shaturko.bean.tour.TypeOfRoom;
 import by.epam.shaturko.dao.DAOProvider;
 import by.epam.shaturko.dao.FillingDBDAO;
 import by.epam.shaturko.dao.GenerateToursDAO;
 import by.epam.shaturko.dao.TransactionalDAO;
 import by.epam.shaturko.dao.exception.DAOException;
 import by.epam.shaturko.dao.exception.TransactionException;
+import by.epam.shaturko.entity.tour.Categories;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.tour.Tour;
+import by.epam.shaturko.entity.tour.TourStatus;
+import by.epam.shaturko.entity.tour.TypeOfFood;
+import by.epam.shaturko.entity.tour.TypeOfPlacement;
+import by.epam.shaturko.entity.tour.TypeOfRoom;
 import by.epam.shaturko.service.GenerateToursService;
 import by.epam.shaturko.service.exception.ServiceException;
 

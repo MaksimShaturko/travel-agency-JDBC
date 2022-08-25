@@ -10,13 +10,13 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.shaturko.bean.user.Details;
-import by.epam.shaturko.bean.user.User;
-import by.epam.shaturko.bean.user.UserRole;
 import by.epam.shaturko.controller.Controller;
 import by.epam.shaturko.dao.AuthorizationDAO;
 import by.epam.shaturko.dao.ColumnName;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.user.Details;
+import by.epam.shaturko.entity.user.User;
+import by.epam.shaturko.entity.user.UserRole;
 
 public class AuthorizationDAOImpl implements AuthorizationDAO {
 	private static final Logger logger = LogManager.getLogger(AuthorizationDAOImpl.class);

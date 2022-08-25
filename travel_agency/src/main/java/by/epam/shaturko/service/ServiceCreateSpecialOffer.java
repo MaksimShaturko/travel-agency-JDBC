@@ -2,8 +2,8 @@ package by.epam.shaturko.service;
 
 import java.util.List;
 
-import by.epam.shaturko.bean.tour.SpecialOffer;
-import by.epam.shaturko.bean.tour.Tour;
+import by.epam.shaturko.entity.tour.SpecialOffer;
+import by.epam.shaturko.entity.tour.Tour;
 import by.epam.shaturko.service.exception.ServiceException;
 
 public interface ServiceCreateSpecialOffer {

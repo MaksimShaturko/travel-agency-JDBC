@@ -2,9 +2,9 @@ package by.epam.shaturko.dao;
 
 import java.sql.Connection;
 
-import by.epam.shaturko.bean.user.Details;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.user.Details;
+import by.epam.shaturko.entity.user.User;
 
 public interface SaveUserDAO {
 	

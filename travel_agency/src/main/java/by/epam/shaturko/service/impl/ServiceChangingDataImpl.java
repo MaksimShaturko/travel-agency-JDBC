@@ -2,14 +2,14 @@ package by.epam.shaturko.service.impl;
 
 import java.sql.Connection;
 
-import by.epam.shaturko.bean.tour.Tour;
-import by.epam.shaturko.bean.tour.TourOrder;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.ChangingDataDAO;
 import by.epam.shaturko.dao.DAOProvider;
 import by.epam.shaturko.dao.TransactionalDAO;
 import by.epam.shaturko.dao.exception.DAOException;
 import by.epam.shaturko.dao.exception.TransactionException;
+import by.epam.shaturko.entity.tour.Tour;
+import by.epam.shaturko.entity.tour.TourOrder;
+import by.epam.shaturko.entity.user.User;
 import by.epam.shaturko.service.ServiceChangingData;
 import by.epam.shaturko.service.exception.ServiceException;
 

@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.epam.shaturko.bean.user.UserRole;
 import by.epam.shaturko.controller.Constant;
 import by.epam.shaturko.controller.SessionAttribute;
 import by.epam.shaturko.controller.command.Command;
+import by.epam.shaturko.entity.user.UserRole;
 
 public class LogOut implements Command {
 	private final static LogOut INSTANCE = new LogOut();

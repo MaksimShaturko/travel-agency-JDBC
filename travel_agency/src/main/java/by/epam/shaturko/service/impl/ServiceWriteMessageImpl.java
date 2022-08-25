@@ -2,12 +2,12 @@ package by.epam.shaturko.service.impl;
 
 import java.sql.Connection;
 
-import by.epam.shaturko.bean.Message;
 import by.epam.shaturko.dao.DAOProvider;
 import by.epam.shaturko.dao.SaveMessageDAO;
 import by.epam.shaturko.dao.TransactionalDAO;
 import by.epam.shaturko.dao.exception.DAOException;
 import by.epam.shaturko.dao.exception.TransactionException;
+import by.epam.shaturko.entity.Message;
 import by.epam.shaturko.service.ServiceWriteMessage;
 import by.epam.shaturko.service.exception.ServiceException;
 

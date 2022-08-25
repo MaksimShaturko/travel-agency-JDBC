@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import by.epam.shaturko.bean.Message;
-import by.epam.shaturko.bean.tour.Categories;
-import by.epam.shaturko.bean.tour.City;
-import by.epam.shaturko.bean.tour.Country;
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.tour.Tour;
-import by.epam.shaturko.bean.tour.TourOrder;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.Message;
+import by.epam.shaturko.entity.tour.Categories;
+import by.epam.shaturko.entity.tour.City;
+import by.epam.shaturko.entity.tour.Country;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.tour.Tour;
+import by.epam.shaturko.entity.tour.TourOrder;
+import by.epam.shaturko.entity.user.User;
 
 public interface GettingDataDAO {
 	List<String> getListOfCountriesNames(ThreadLocal<Connection> threadLocal) throws DAOException;

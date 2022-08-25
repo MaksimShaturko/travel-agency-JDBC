@@ -2,7 +2,7 @@ package by.epam.shaturko.service;
 
 import java.util.Optional;
 
-import by.epam.shaturko.bean.user.User;
+import by.epam.shaturko.entity.user.User;
 import by.epam.shaturko.service.exception.ServiceException;
 
 public interface ServiceAuthorization {

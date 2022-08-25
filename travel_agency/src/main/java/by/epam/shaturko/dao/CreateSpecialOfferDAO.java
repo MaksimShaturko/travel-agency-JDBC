@@ -3,12 +3,12 @@ package by.epam.shaturko.dao;
 import java.sql.Connection;
 import java.util.List;
 
-import by.epam.shaturko.bean.tour.City;
-import by.epam.shaturko.bean.tour.Country;
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.tour.SpecialOffer;
-import by.epam.shaturko.bean.tour.Tour;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.City;
+import by.epam.shaturko.entity.tour.Country;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.tour.SpecialOffer;
+import by.epam.shaturko.entity.tour.Tour;
 
 public interface CreateSpecialOfferDAO {
 	

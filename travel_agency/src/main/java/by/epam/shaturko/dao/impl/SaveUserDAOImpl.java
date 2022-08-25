@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.shaturko.bean.user.Details;
-import by.epam.shaturko.bean.user.User;
-import by.epam.shaturko.bean.user.UserRole;
 import by.epam.shaturko.dao.SaveUserDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.user.Details;
+import by.epam.shaturko.entity.user.User;
+import by.epam.shaturko.entity.user.UserRole;
 
 /**
  * The SaveUserDAOImpl class represents SaveUserDAO implementation.

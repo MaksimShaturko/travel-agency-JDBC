@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import by.epam.shaturko.bean.tour.City;
-import by.epam.shaturko.bean.tour.Country;
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.user.UserRole;
 import by.epam.shaturko.dao.FillingDBDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.City;
+import by.epam.shaturko.entity.tour.Country;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.user.UserRole;
 
 public class FillingDBDAOImpl implements FillingDBDAO {
 	private final static String FILL_IN_CATEGORIES = "INSERT into travel_agency.categories (name) VALUES (?)";

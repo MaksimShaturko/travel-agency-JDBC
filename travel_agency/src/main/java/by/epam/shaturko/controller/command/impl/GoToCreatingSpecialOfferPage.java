@@ -13,11 +13,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.shaturko.bean.tour.SpecialOffer;
 import by.epam.shaturko.controller.Constant;
 import by.epam.shaturko.controller.PagePath;
 import by.epam.shaturko.controller.SessionAttribute;
 import by.epam.shaturko.controller.command.Command;
+import by.epam.shaturko.entity.tour.SpecialOffer;
 import by.epam.shaturko.service.ServiceCreateSpecialOffer;
 import by.epam.shaturko.service.ServiceGettingData;
 import by.epam.shaturko.service.ServiceProvider;

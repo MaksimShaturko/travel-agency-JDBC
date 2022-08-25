@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import by.epam.shaturko.bean.tour.Tour;
-import by.epam.shaturko.bean.tour.TourOrder;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.ChangingDataDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.Tour;
+import by.epam.shaturko.entity.tour.TourOrder;
+import by.epam.shaturko.entity.user.User;
 
 public class ChangingDataDAOImpl implements ChangingDataDAO {
 	private final static String CHANGE_AGENCY_DISCOUNT = "UPDATE travel_agency.user_details SET travel_agency.user_details.agency_additional_discount"

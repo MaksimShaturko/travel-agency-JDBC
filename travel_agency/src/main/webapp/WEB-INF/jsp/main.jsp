@@ -71,7 +71,7 @@
 	<header>
 		<jsp:include page="header.jsp" />
 	</header>
-	<main>
+	<div class="main-div">
 		<c:if test="${!auth}">
 			<div class="auth-div">
 				<div class="auth-info-message">${auth_to_enter}</div>
@@ -80,96 +80,91 @@
 				</c:if>
 				<div class="auth-form">
 					<form action="Controller" method="post">
-						<input type="hidden" name="command" value="authorization" /> <input class="auth-input-text"
-							type="text" name="login" placeholder="${login}" /> <input class="auth-input-text"
+						<input type="hidden" name="command" value="authorization" /> <input
+							class="auth-input-text" type="text" name="login"
+							placeholder="${login}" /> <input class="auth-input-text"
 							type="password" name="password" placeholder="${password}" /> <input
-							type="submit" value="${log_in}" />
+							class="auth-input-submit" type="submit" value="${log_in}" />
 					</form>
 				</div>
 			</div>
 		</c:if>
 
+
 		<c:if test="${auth}">
 			<c:if test="${role=='ADMIN'}">
-				<h4>${admin_title}</h4>
-				<br>
-				<br>
-				<a href="Controller?command=filling_db">${filling_db}</a>
-				<br>
-				<br>
-				<a href="Controller?command=generate_tours">${gen_tours}</a>
+				<div class="text-admin-page">
+					<h4>${admin_title}</h4>
+				</div>
+				<div class="text2">
+					<a href="Controller?command=filling_db">${filling_db}</a>
+				</div>
+				<div class="text2">
+					<a href="Controller?command=generate_tours">${gen_tours}</a>
+				</div>
 			</c:if>
-			<div>
-				<h3>${select_tour}:</h3>
-			</div>
-			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="get_chosen_tours" />
-				<div>
-					${choose_country}: <select name="country">
-						<c:forEach items="${sessionScope.countries}" var="country">
-							<option>${country}</option>
-						</c:forEach>
-					</select>
+			<div class="auth-div">
+				<div class="text">
+					<h3>${select_tour}:</h3>
 				</div>
+				<div class="auth-form">
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="get_chosen_tours" />
+						<div class="form-text">${choose_country}:</div>
+						<select name="country">
+							<c:forEach items="${sessionScope.countries}" var="country">
+								<option>${country}</option>
+							</c:forEach>
+						</select>
+						<div class="form-text">${choose_rest}:</div>
+						<select name="category">
+							<c:forEach items="${sessionScope.categories}" var="category">
+								<option>${category}</option>
+							</c:forEach>
+						</select>
 
-				<div>
-					${choose_rest}: <select name="category">
-						<c:forEach items="${sessionScope.categories}" var="category">
-							<option>${category}</option>
-						</c:forEach>
-					</select>
-				</div>
-				${budget}:
-				<div>
-					<input type="text" name="priceFrom" /> - <input type="text"
-						name="priceTo" />
-				</div>
-				${number_of_people}:
-				<div>
-					<select name="numberOfPeople">
-						<c:forEach items="${sessionScope.numbers.keySet()}" var="number">
-							<option>${number}</option>
-						</c:forEach>
-					</select>
-				</div>
-				${date_departure}:
+						<div class="form-text">${budget}:</div>
+						<div>
+							<input type="text" name="priceFrom" /> - <input type="text"
+								name="priceTo" />
+						</div>
+						<div class="form-text">${number_of_people}:</div>
+						<div>
+							<select name="numberOfPeople">
+								<c:forEach items="${sessionScope.numbers.keySet()}" var="number">
+									<option>${number}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-text">${date_departure}:</div>
 
-				<div class="form-group">
-					<input type="date" name="dateDeparture" class="form-control">
-				</div>
-
-				${days}: <br>
-				<div>
-					${from} <select name="durationFrom">
-						<c:forEach items="${sessionScope.durations}" var="duration">
-							<option>${duration}</option>
-						</c:forEach>
-					</select>
-				</div>
-
-				<div>
-					${to} <select name="durationTo">
-						<c:forEach items="${sessionScope.durations}" var="duration">
-							<option>${duration}</option>
-						</c:forEach>
-					</select>
-				</div>
-
-				<%-- 			<div>
+						<div class="form-group">
+							<input type="date" name="dateDeparture" class="form-control">
+						</div>
+						<div class="form-text">${days}:</div>
+						<div>
+							${from} <select name="durationFrom">
+								<c:forEach items="${sessionScope.durations}" var="duration">
+									<option>${duration}</option>
+								</c:forEach>
+							</select> - ${to} <select name="durationTo">
+								<c:forEach items="${sessionScope.durations}" var="duration">
+									<option>${duration}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<%-- 			<div>
 				${type_food}:
 				<c:forEach items="${sessionScope.food}" var="foodType">
 					<input type="checkbox" name="food" value="${foodType}">${foodType}</input>
 				</c:forEach>
 			</div> 
 			<div>
-
 				${placement}: 					
 					<c:forEach items="${sessionScope.placements}" var="placementType">
 					<input type="checkbox" name="typeOfPlacement" value="${placementType}">${placementType}</input>
-				</c:forEach>
-				
+				</c:forEach>				
 			</div>
-
 		<div>
 				${room}:					
 					<c:forEach items="${sessionScope.rooms}" var="roomType">
@@ -177,13 +172,12 @@
 				</c:forEach>
 			</div> 
 			--%>
-
-				<div>
-					<input type="submit" value="${select_tour}" />
+						<input class="auth-input-submit" type="submit"
+							value="${select_tour}" />
+					</form>
 				</div>
-			</form>
+			</div>
 		</c:if>
-		<br>
-	</main>
+	</div>
 </body>
 </html>

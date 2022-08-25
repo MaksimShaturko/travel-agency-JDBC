@@ -5,13 +5,13 @@ import java.sql.Connection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.shaturko.bean.user.Details;
-import by.epam.shaturko.bean.user.User;
 import by.epam.shaturko.dao.DAOProvider;
 import by.epam.shaturko.dao.SaveUserDAO;
 import by.epam.shaturko.dao.TransactionalDAO;
 import by.epam.shaturko.dao.exception.DAOException;
 import by.epam.shaturko.dao.exception.TransactionException;
+import by.epam.shaturko.entity.user.Details;
+import by.epam.shaturko.entity.user.User;
 import by.epam.shaturko.service.RegistrationService;
 import by.epam.shaturko.service.exception.ServiceException;
 

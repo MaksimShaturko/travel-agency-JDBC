@@ -192,9 +192,9 @@ ${title_visited}
 			<tr>
 				<td>${location}</td>
 				<td>${hotel_image}</td>
-				<td>${start_date}</td>
-				<td>${return_date}</td>
 				<td>${stars}</td>
+				<td>${start_date}</td>
+				<td>${return_date}</td>				
 				<td>${room}</td>
 				<td>${food}</td>
 				<td>${placement}</td>

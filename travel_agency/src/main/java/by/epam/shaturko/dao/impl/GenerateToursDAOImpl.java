@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import by.epam.shaturko.bean.tour.Categories;
-import by.epam.shaturko.bean.tour.Hotel;
-import by.epam.shaturko.bean.tour.Tour;
 import by.epam.shaturko.dao.ColumnName;
 import by.epam.shaturko.dao.GenerateToursDAO;
 import by.epam.shaturko.dao.exception.DAOException;
+import by.epam.shaturko.entity.tour.Categories;
+import by.epam.shaturko.entity.tour.Hotel;
+import by.epam.shaturko.entity.tour.Tour;
 
 public class GenerateToursDAOImpl implements GenerateToursDAO {
 	private static final String INSERT_TOURS = "INSERT into travel_agency.tours (price_start, date_of_departure, date_of_return, "
