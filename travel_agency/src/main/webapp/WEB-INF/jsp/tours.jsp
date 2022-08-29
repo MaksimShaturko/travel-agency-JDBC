@@ -77,20 +77,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>
-<c:if test="${sessionScope.toursRequest == 'ordered'}">
+<title><c:if test="${sessionScope.toursRequest == 'ordered'}">
 ${title_ordered}
-</c:if>
-<c:if test="${sessionScope.toursRequest == 'chosen'}">
+</c:if> <c:if test="${sessionScope.toursRequest == 'chosen'}">
 ${title_chosen}
-</c:if>
-<c:if test="${sessionScope.toursRequest == 'visited'}">
+</c:if> <c:if test="${sessionScope.toursRequest == 'visited'}">
 ${title_visited}
-</c:if>
-</title>
+</c:if></title>
 </head>
 <body>
-<header>
+	<header>
 		<jsp:include page="header.jsp" />
 	</header>
 	<br>
@@ -194,7 +190,7 @@ ${title_visited}
 				<td>${hotel_image}</td>
 				<td>${stars}</td>
 				<td>${start_date}</td>
-				<td>${return_date}</td>				
+				<td>${return_date}</td>
 				<td>${room}</td>
 				<td>${food}</td>
 				<td>${placement}</td>
@@ -209,8 +205,9 @@ ${title_visited}
 						<input type="hidden" name="command" value="view_tour" /> <input
 							type="hidden" name="tourId" value="${tour.id}" />
 						<tr>
-							<td>${just_country}: ${tour.hotel.city.country.name}<br> ${just_city}:
-								${tour.hotel.city.name}<br> ${just_hotel}: ${tour.hotel.name}
+							<td>${just_country}:${tour.hotel.city.country.name}<br>
+								${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+								${tour.hotel.name}
 							</td>
 							<td><img
 								style="object-fit: cover; height: 200px; width: 250px"
@@ -236,8 +233,9 @@ ${title_visited}
 
 				<c:if test="${sessionScope.role == 'CLIENT' }">
 					<tr>
-						<td>${just_country}: ${tour.hotel.city.country.name}<br> ${just_city}:
-							${tour.hotel.city.name}<br> ${just_hotel}: ${tour.hotel.name}
+						<td>${just_country}:${tour.hotel.city.country.name}<br>
+							${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+							${tour.hotel.name}
 						</td>
 						<td><img
 							style="object-fit: cover; height: 200px; width: 250px"
@@ -276,15 +274,16 @@ ${title_visited}
 				<td>${hotel_image}</td>
 				<td>${stars}</td>
 				<td>${start_date}</td>
-				<td>${return_date}</td>				
+				<td>${return_date}</td>
 				<td>${room}</td>
 				<td>${food}</td>
 				<td>${placement}</td>
 			</tr>
 			<c:forEach items="${sessionScope.toursList}" var="tour">
 				<tr>
-					<td>${just_country}: ${tour.hotel.city.country.name}<br> ${just_city}:
-						${tour.hotel.city.name}<br> ${just_hotel}: ${tour.hotel.name}
+					<td>${just_country}:${tour.hotel.city.country.name}<br>
+						${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+						${tour.hotel.name}
 					</td>
 					<td><img
 						style="object-fit: cover; height: 200px; width: 250px"
@@ -303,5 +302,8 @@ ${title_visited}
 	<c:if test="${sessionScope.toursRequest == 'isEmpty'}">
 	${message_no_tours}
 	</c:if>
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
 </body>
 </html>

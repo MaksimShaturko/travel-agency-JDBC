@@ -93,14 +93,16 @@
 
 		<c:if test="${auth}">
 			<c:if test="${role=='ADMIN'}">
-				<div class="text-admin-page">
-					<h4>${admin_title}</h4>
-				</div>
-				<div class="text2">
-					<a href="Controller?command=filling_db">${filling_db}</a>
-				</div>
-				<div class="text2">
-					<a href="Controller?command=generate_tours">${gen_tours}</a>
+				<div class="into-main-div">
+					<div class="text-admin-page">
+						<h4>${admin_title}</h4>
+					</div>
+					<div class="text2">
+						<a href="Controller?command=filling_db">${filling_db}</a>
+					</div>
+					<div class="text2">
+						<a href="Controller?command=generate_tours">${gen_tours}</a>
+					</div>
 				</div>
 			</c:if>
 			<div class="auth-div">
@@ -179,5 +181,8 @@
 			</div>
 		</c:if>
 	</div>
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
 </body>
 </html>

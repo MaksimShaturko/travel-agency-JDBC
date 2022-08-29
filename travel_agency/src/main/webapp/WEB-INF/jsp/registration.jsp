@@ -11,7 +11,7 @@
 <title><fmt:message key="registration_page.title" /></title>
 </head>
 <body>
-<header>
+	<header>
 		<jsp:include page="header.jsp" />
 	</header>
 	<c:if test="${sessionScope.isDetails == null}">
@@ -41,49 +41,68 @@
 				<fmt:message key="registration_page.password_invalid" />
 			</c:if>
 			<br> <input type="hidden" name="command" value="registration" /><br>
-			 <fmt:message key="registration_page.email"/><br><input type="text" name="email" value="${parameters['email']}"/><br>
-			 <fmt:message key="registration_page.login"/><br><input type="text" name="login" value="${parameters['login']}"/><br>
-			 <fmt:message key="registration_page.password"/><br><input type="password" name="password"
-				placeholder="" /> <br><fmt:message key="registration_page.repeat_password"/><br><input
-				type="password" name="repeatPassword"
-				placeholder="" />
-			<input type="submit" value="<fmt:message key="registration_page.send" />" />
+			<fmt:message key="registration_page.email" />
+			<br>
+			<input type="text" name="email" value="${parameters['email']}" /><br>
+			<fmt:message key="registration_page.login" />
+			<br>
+			<input type="text" name="login" value="${parameters['login']}" /><br>
+			<fmt:message key="registration_page.password" />
+			<br>
+			<input type="password" name="password" placeholder="" /> <br>
+			<fmt:message key="registration_page.repeat_password" />
+			<br>
+			<input type="password" name="repeatPassword" placeholder="" /> <input
+				type="submit" value="<fmt:message key="registration_page.send" />" />
 		</form>
 	</c:if>
 
 	<c:if test="${sessionScope.isDetails != null}">
-			<fmt:message key="registration_page.add_inf" /><br><br>
+		<fmt:message key="registration_page.add_inf" />
+		<br>
+		<br>
 
-			<c:if test="${param.message=='nameInvalid'}">
-				<fmt:message key="registration_page.name_invalid" />
-			</c:if>
-			<c:if test="${param.message=='surnameInvalid'}">
-				<fmt:message key="registration_page.surname_invalid" />
-			</c:if>
-			<c:if test="${param.message=='namesInvalid'}">
-				<fmt:message key="registration_page.names_invalid" />
-			</c:if>
-			<c:if test="${param.message=='phoneNumberInvalid'}">
-				<fmt:message key="registration_page.phone_number_invalid" />
-			</c:if>
-			<c:if test="${param.message=='detailsInvalid'}">
-				<fmt:message key="registration_page.details_invalid" />
-			</c:if>
+		<c:if test="${param.message=='nameInvalid'}">
+			<fmt:message key="registration_page.name_invalid" />
+		</c:if>
+		<c:if test="${param.message=='surnameInvalid'}">
+			<fmt:message key="registration_page.surname_invalid" />
+		</c:if>
+		<c:if test="${param.message=='namesInvalid'}">
+			<fmt:message key="registration_page.names_invalid" />
+		</c:if>
+		<c:if test="${param.message=='phoneNumberInvalid'}">
+			<fmt:message key="registration_page.phone_number_invalid" />
+		</c:if>
+		<c:if test="${param.message=='detailsInvalid'}">
+			<fmt:message key="registration_page.details_invalid" />
+		</c:if>
 		<br>
 		<form action="Controller" method="post">
 			<input type="hidden" name="command" value="registration" /><br>
-			<br> <fmt:message key="registration_page.name"/><br><input type="text" name="name" value="${parameters['name']}" /><br>
-			<br><fmt:message key="registration_page.surname"/> <br><input type="text" name="surname"
-				value="${parameters['surname']}" /><br>
-			<br><fmt:message key="registration_page.phone_number"/> <br><input type="text" name="phoneNumber"
-				value="${parameters['phoneNumber']}" /><br>
-			<br> <input type="submit"
-				value="<fmt:message key="registration_page.save"/>" />
+			<br>
+			<fmt:message key="registration_page.name" />
+			<br>
+			<input type="text" name="name" value="${parameters['name']}" /><br>
+			<br>
+			<fmt:message key="registration_page.surname" />
+			<br>
+			<input type="text" name="surname" value="${parameters['surname']}" /><br>
+			<br>
+			<fmt:message key="registration_page.phone_number" />
+			<br>
+			<input type="text" name="phoneNumber"
+				value="${parameters['phoneNumber']}" /><br> <br> <input
+				type="submit" value="<fmt:message key="registration_page.save"/>" />
 		</form>
 	</c:if>
 	<br>
 	<br>
 	<a href="Controller?command=go_to_main_page"><fmt:message
 			key="registration_page.to_main" /></a>
+
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
 </body>
 </html>

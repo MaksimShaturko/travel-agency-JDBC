@@ -3,19 +3,20 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
 body {
-	background-color: #8CDAFF;
 	font-family: "Oswald";
 	margin: 4rem 4rem 4rem 4rem;
 }
 
 .navbar {
+	border: 2px solid black;
 	background-color: #BF4452;
-	height: 3rem;
+	height: 4rem;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	padding-left: 2rem;
 	padding-right: 0.5rem;
+	margin-bottom: 15px;
 }
 
 .navbar .nav-button {
@@ -57,10 +58,71 @@ body {
 }
 
 .main-div {
+	border: 2px solid black;
+	background-color: #8CDAFF;
 	display: flex;
+	flex-direction: row;
 	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+	padding: 20px, 20px, 20px, 20px;
+}
+
+.main-div .into-main-div {
+	padding-top: 30px;
+	padding-left: 50px;
+}
+
+.main-div .into-main-div-so {
+	border: 2px solid black;
+	padding: 30px;
+	font-size: 16px;
+	align-self: center;
+}
+
+.main-div .into-main-div-so-2 {
+	border: 2px solid black;
+	padding: 30px;
+	font-size: 16px;
+	align-self: center;
+	margin: auto;
+}
+
+.main-div .into-main-div-so-2 .so-button {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #FF8694;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-div .into-main-div-so-2 .so-button:hover {
+	background-color: #BF4452;
+	cursor: pointer;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-div .into-main-div-so .title-so {
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.main-div .into-main-div-so .main-text-so {
+	font-size: 16px;
+}
+
+.main-div .into-main-div-so-2 .title-so {
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.main-div .into-main-div-so-2 .main-text-so {
+	font-size: 16px;
 }
 
 .main-div .auth-div {
@@ -68,10 +130,15 @@ body {
 	padding: 20px 30px 30px 20px;
 	margin-top: 60px;
 	margin-bottom: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	align-self: center;
+	justify-self: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	display: flex;
 }
 
 .main-div .auth-div .auth-info-message {
@@ -104,12 +171,12 @@ body {
 	font-size: 20px;
 }
 
-.main-div .text2 {
+.main-div .into-main-div .text2 {
 	font-size: 20px;
 	align-self: flex-start;
 }
 
-.main-div .text-admin-page {
+.main-div .into-main-div .text-admin-page {
 	align-self: flex-start;
 }
 
@@ -126,7 +193,7 @@ body {
 }
 
 .auth-form .auth-input-submit:hover {
-	background-color: #FF233D;
+	background-color: #BF4452;
 	cursor: pointer;
 	font: inherit;
 	font-size: 20px;
@@ -135,10 +202,11 @@ body {
 }
 
 .footer-div {
+	border: 2px solid black;
 	background-color: #BF4452;
-	height: 3rem;	
-	padding-left: 2rem;
-	padding-right: 0.5rem;
+	height: 4rem;
+	margin-top: 15px;
+	padding-bottom: 10px;
 }
 
 .footer-div .footer-text {

@@ -56,105 +56,95 @@
 	var="create_and_apply" />
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>${title}</title>
 </head>
 <body>
-<header>
+	<header>
 		<jsp:include page="header.jsp" />
 	</header>
-	<div>		
-	<br>
-	<div>${apply_for_tours}:</div>
-	<br>
-
 	<form action="Controller" method="post">
-		<input type="hidden" name="command" value="create_special_offer" />
-		<div>
-			<c:if test="${sessionScope.showCountries}">
-				<div>${choose_countries}</div>
-				<br>
-				<c:forEach items="${sessionScope.listOfCountriesNames}"
-					var="country">
-					<input type="checkbox" name="countryNames" value="${country}">${country}</input>
+		<div class="main-div">
+			<input type="hidden" name="command" value="create_special_offer" />
+			<div class="into-main-div-so">
+				<c:if test="${sessionScope.showCountries}">
+					<div class="title-so">${choose_countries}</div>
+					<div class=main-text-so">
+					<c:forEach items="${sessionScope.listOfCountriesNames}"
+						var="country">
+						<input type="checkbox" name="countryNames" value="${country}">${country}</input>
+						<br>
+					</c:forEach>
+					</div>
+					<input type="submit" name="chooseC" value="${open_cities}"></input>
+				</c:if>
+				<c:if test="${showCities && !showCountries && !showHotels}">
+					<div>${choose_cities}</div>
+					<c:forEach items="${sessionScope.citiesList}" var="city">
+						<input type="checkbox" name="citiesNames" value="${city.name}">${city.name}</input>
+						<br>
+					</c:forEach>
+					<c:if test="${param.message=='noCountries'}">${no_countries}</c:if>
+					<input type="submit" name="chooseH" value="${open_hotels}"></input>
+					<button
+						onclick="window.location.href = 'Controller?command=create_special_offer&startAgain=start'">${return_to_countries}</button>
 					<br>
-				</c:forEach>
-				<br>
-				<input type="submit" name="chooseC" value="${open_cities}"></input>
-			</c:if>
-		</div>
-		<c:if test="${showCities && !showCountries && !showHotels}">
-			<div>${choose_cities}</div>
-			<br>
-			<div>
-				<c:forEach items="${sessionScope.citiesList}" var="city">
-					<input type="checkbox" name="citiesNames" value="${city.name}">${city.name}</input>
-					<br>
-				</c:forEach>
-				<c:if test="${param.message=='noCountries'}">${no_countries}</c:if>
-				<br> <input type="submit" name="chooseH" value="${open_hotels}"></input>
-			</div>
-			<br>
-			<button
-				onclick="window.location.href = 'Controller?command=create_special_offer&startAgain=start'">${return_to_countries}</button>
-			<br>
-		</c:if>
-		<c:if test="${showHotels}">
-			<div>${choose_hotels}</div>
-			<br>
-			<div>
-				<c:forEach items="${sessionScope.hotelsList}" var="hotel">
-					<input type="checkbox" name="hotelsNames" value="${hotel.name}">${hotel.name}</input>
-					<br>
-				</c:forEach>
-				<c:if test="${param.message=='noCities'}">
+				</c:if>
+				<c:if test="${showHotels}">
+					<div>${choose_hotels}</div>
+					<c:forEach items="${sessionScope.hotelsList}" var="hotel">
+						<input type="checkbox" name="hotelsNames" value="${hotel.name}">${hotel.name}</input>
+						<br>
+					</c:forEach>
+					<c:if test="${param.message=='noCities'}">
 				${no_cities}
 			</c:if>
-				<br>
-				<button
-					onclick="window.location.href='Controller?command=create_special_offer&startAgain=start';">${return_to_countries}</button>
-				<br>
-			</div>
-		</c:if>
-
-		<c:if test="${param.message=='titleInvalid'}">
+					<button
+						onclick="window.location.href='Controller?command=create_special_offer&startAgain=start';">${return_to_countries}</button>
+				</c:if>
+				<c:if test="${param.message=='titleInvalid'}">
 				${title_invalid}
 			</c:if>
-		<c:if test="${param.message=='descriptionInvalid'}">
+				<c:if test="${param.message=='descriptionInvalid'}">
 					${desc_invalid}
 			</c:if>
-		<c:if test="${param.message=='parametersInvalid'}">
+				<c:if test="${param.message=='parametersInvalid'}">
 					${params_invalid}
 			</c:if>
 
-		<c:if test="${param.message=='discountInvalid'}">
+				<c:if test="${param.message=='discountInvalid'}">
 					${discount_invalid}
 			</c:if>
-		<c:if test="${param.message=='parameters_and_discountInvalid'}">
+				<c:if test="${param.message=='parameters_and_discountInvalid'}">
 					${params_and_discount_invalid}
 			</c:if>
-		<br>
-		<c:if test="${param.message=='noCountriesToApply'}">
+				<br>
+				<c:if test="${param.message=='noCountriesToApply'}">
 				${no_countries_to_apply}
 			</c:if>
-		<br>
-		<div>
-			${choose_from_list}: <select name="specialOffer">
-				<c:forEach items="${sessionScope.specialOffers}" var="so">
-					<option>${so.title}</option>
-				</c:forEach>
-			</select> <input type="submit" name="applySO" value="${apply}" />
-		</div>${orr}<br><br>${create_for_list}<br><br>${spec_title}
-		<br> <input type="text" name="title"
-			value="${parameters['title']}" minlength="5" maxlength="50" /> <br>${spec_desc}<br>
-		<input type="text" name="description"
-			value="${parameters['description']}" minlength="5" maxlength="1000" />
-		<br>${spec_disc} <br> <input type="number" name="discount"
-			value="${parameters['discount']}" min="1" max="99" /> <br> <br>
-		<input type="submit" value="${create_and_apply}" /><br>
-		${if_no_chosen}
+				${choose_from_list}: <select name="specialOffer">
+					<c:forEach items="${sessionScope.specialOffers}" var="so">
+						<option>${so.title}</option>
+					</c:forEach>
+				</select> <input type="submit" name="applySO" value="${apply}" />
+			</div>
+			<div class="into-main-div-so-2">
+				<div class="title-so">${create_for_list}</div>
+				<div class="main-text-so">${spec_title} </div>
+				<input type="text" name="title" value="${parameters['title']}"
+					minlength="5" maxlength="50" /> <div class="main-text-so">${spec_desc}</div> <input
+					type="text" name="description" value="${parameters['description']}"
+					minlength="5" maxlength="1000" /> <br><div class="main-text-so">${spec_disc}</div>
+				<input type="number" name="discount"
+					value="${parameters['discount']}" min="1" max="99" /> <br> <br>
+				<input class="so-button" type="submit" value="${create_and_apply}" /><br>
+				${if_no_chosen}
+			</div>
+			<br>
+		</div>
 	</form>
-	<br>
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
 </body>
 </html>

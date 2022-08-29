@@ -22,8 +22,7 @@
 	var="hotel_image" />
 <fmt:message bundle="${loc}" key="tour_page.hotel_description"
 	var="hotel_description" />
-<fmt:message bundle="${loc}" key="tour_page.country"
-	var="just_country" />
+<fmt:message bundle="${loc}" key="tour_page.country" var="just_country" />
 <fmt:message bundle="${loc}" key="tour_page.about_country"
 	var="about_country" />
 <fmt:message bundle="${loc}" key="tour_page.city" var="just_city" />
@@ -71,7 +70,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header>
+	<header>
 		<jsp:include page="header.jsp" />
 	</header>
 	<br>
@@ -270,6 +269,10 @@
 			</form>
 		</c:if>
 	</c:if>
-	<br><br>
+	<br>
+	<br>
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
 </body>
 </html>

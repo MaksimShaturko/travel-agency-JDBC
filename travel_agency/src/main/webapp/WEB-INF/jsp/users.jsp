@@ -35,7 +35,7 @@
 <title>${users_list}</title>
 </head>
 <body>
-<header>
+	<header>
 		<jsp:include page="header.jsp" />
 	</header>
 	<br>
@@ -71,8 +71,9 @@
 			</tr>
 		</c:forEach>
 	</table>
-
 	<br>
-
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
 </body>
 </html>
