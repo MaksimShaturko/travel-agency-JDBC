@@ -13,11 +13,13 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
-
 <body>
 	<div class="footer-div">
-	<p class="footer-text"><fmt:message key="message.copyright_project"/><br>
-	<fmt:message key="message.copyright_author"/></p>
+		<p class="footer-text">
+			<fmt:message key="message.copyright_project" />
+			<br>
+			<fmt:message key="message.copyright_author" />
+		</p>
 	</div>
 </body>
 </html>

@@ -67,26 +67,75 @@ body {
 }
 
 .main-div .into-main-div {
-	padding-top: 30px;
+	padding-top: 60px;
 	padding-left: 50px;
+	align-self: flex-start;
 }
 
 .main-div .into-main-div-so {
-	border: 2px solid black;
+	border: 2px solid #BFA744;
 	padding: 30px;
 	font-size: 16px;
 	align-self: center;
+	background-color: #FFE786;
 }
 
 .main-div .into-main-div-so-2 {
-	border: 2px solid black;
+	border: 2px solid #BFA744;
 	padding: 30px;
 	font-size: 16px;
 	align-self: center;
 	margin: auto;
+	background-color: #FFE786;
 }
 
-.main-div .into-main-div-so-2 .so-button {
+.main-div .into-main-div-so-2 .message-so {
+	font-size: 12px;
+}
+
+.main-div .into-main-div-so .so-button {
+	display: block;
+	width: 150px;
+	height: 2em;
+	margin-top: 20px;
+	background-color: #8CDAFF;
+	font: inherit;
+	font-size: 16px;
+}
+
+.main-div .into-main-div-so .so-button-country {
+	display: block;
+	width: 250px;
+	height: 2em;
+	margin-top: 20px;
+	background-color: #8CDAFF;
+	font: inherit;
+	font-size: 16px;
+}
+
+.main-div .into-main-div-so .so-button-country:hover {
+	display: block;
+	width: 250px;
+	height: 2em;
+	margin-top: 20px;
+	background-color: #4A99BF;
+	font: inherit;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.main-div .into-main-div-so .so-button:hover {
+	display: block;
+	width: 150px;
+	height: 2em;
+	margin-top: 20px;
+	background-color: #4A99BF;
+	font: inherit;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.main-div .into-main-div-so .so-button-apply {
 	display: block;
 	width: 200px;
 	height: 40px;
@@ -98,7 +147,37 @@ body {
 	margin-right: auto;
 }
 
-.main-div .into-main-div-so-2 .so-button:hover {
+.main-div .into-main-div-so .so-button-apply:hover {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #BF4452;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.main-div .into-main-div-so .title-so {
+	font-size: 20px;
+	margin-bottom: 20px
+}
+
+.main-div .into-main-div-so-2 .so-button-2 {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #FF8694;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-div .into-main-div-so-2 .so-button-2:hover {
 	background-color: #BF4452;
 	cursor: pointer;
 	font: inherit;
@@ -125,8 +204,18 @@ body {
 	font-size: 16px;
 }
 
+.main-div .into-main-div-so .main-text-so {
+	font-size: 16px;
+}
+
+.main-div .into-main-div-so-2 .small-text-so {
+	font-size: 12px;
+	text-align: center;
+	margin-top: 5px;
+}
+
 .main-div .auth-div {
-	border: 2px solid white;
+	border: 2px solid #BFA744;
 	padding: 20px 30px 30px 20px;
 	margin-top: 60px;
 	margin-bottom: 60px;
@@ -139,6 +228,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	display: flex;
+	background-color: #FFE786;
 }
 
 .main-div .auth-div .auth-info-message {
@@ -204,13 +294,15 @@ body {
 .footer-div {
 	border: 2px solid black;
 	background-color: #BF4452;
-	height: 4rem;
+	height: 3.5rem;
 	margin-top: 15px;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	color: white;
 }
 
 .footer-div .footer-text {
 	text-align: center;
+	margin: auto;
 }
 
 /*

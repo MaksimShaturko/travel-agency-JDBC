@@ -55,17 +55,23 @@
 	var="choose_rest" />
 <fmt:message bundle="${loc}" key="main_page.number_of_people"
 	var="number_of_people" />
-
 <fmt:message bundle="${loc}" key="main_user_page.user_ordered_tours"
 	var="user_ordered_tours" />
 <fmt:message bundle="${loc}" key="main_user_page.user_visited_tours"
 	var="user_visited_tours" />
+<fmt:message bundle="${loc}" key="main_user_page.title" var="user_title" />
+<fmt:message bundle="${loc}" key="main_guest_page.title"
+	var="guest_title" />
 
 <html>
 <head>
 
 <meta charset="UTF-8">
-<title>${title}</title>
+<title><c:if test="${!auth}">
+${guest_title}</c:if> <c:if test="${auth}">
+		<c:if test="${role=='ADMIN'}">${admin_title}</c:if>
+		<c:if test="${role=='CLIENT'}">${user_title}</c:if>
+	</c:if></title>
 </head>
 <body>
 	<header>
@@ -94,9 +100,6 @@
 		<c:if test="${auth}">
 			<c:if test="${role=='ADMIN'}">
 				<div class="into-main-div">
-					<div class="text-admin-page">
-						<h4>${admin_title}</h4>
-					</div>
 					<div class="text2">
 						<a href="Controller?command=filling_db">${filling_db}</a>
 					</div>

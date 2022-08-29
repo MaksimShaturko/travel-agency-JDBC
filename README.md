@@ -2,7 +2,7 @@
 # Study project for the course Java Web Development
 # Author: Shaturko Maksim
 # Description
-The client of the agency can view the suitable tours available in the agency, choose the right one, view in detail and order. He has the opportunity to communicate with the administrator through internal messages of the tour, the client can also cancel the tour and the tour will again become available to other clients. 
+The client of the agency can view the suitable tours available in the agency, choose the right one, view in detail and order. He has the opportunity to communicate with the administrator through internal messages of the tour, the client can also cancel the tour and the tour will again become available to other clients. Tours have discounts through the application of special offers. Each user receives discounts for the tours visited, and can also receive additional discounts from the agency, which will also decrease the price of the tour for this user. 
 
 # Users:
 # 1. Guest (unauthorized user)
