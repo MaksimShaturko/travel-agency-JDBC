@@ -134,6 +134,17 @@ body {
 	margin-right: auto;
 }
 
+.footer-div {
+	background-color: #BF4452;
+	height: 3rem;	
+	padding-left: 2rem;
+	padding-right: 0.5rem;
+}
+
+.footer-div .footer-text {
+	text-align: center;
+}
+
 /*
 https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
  */
