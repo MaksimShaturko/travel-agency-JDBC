@@ -20,7 +20,10 @@ body {
 }
 
 .navbar .nav-button {
+	display: block;
 	margin-right: 2em;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 .navbar .nav-button .nav-submit {
@@ -78,6 +81,9 @@ body {
 	font-size: 16px;
 	align-self: center;
 	background-color: #FFE786;
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .main-div .into-main-div-so-2 {
@@ -85,7 +91,10 @@ body {
 	padding: 30px;
 	font-size: 16px;
 	align-self: center;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	background-color: #FFE786;
 }
 
@@ -162,7 +171,7 @@ body {
 
 .main-div .into-main-div-so .title-so {
 	font-size: 20px;
-	margin-bottom: 20px
+	margin-bottom: 20px;
 }
 
 .main-div .into-main-div-so-2 .so-button-2 {
@@ -198,6 +207,13 @@ body {
 .main-div .into-main-div-so-2 .title-so {
 	font-size: 20px;
 	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-div .into-main-div-so-2 .title-2 {
+	font-size: 20px;
+	margin-left: 40px;
 }
 
 .main-div .into-main-div-so-2 .main-text-so {
