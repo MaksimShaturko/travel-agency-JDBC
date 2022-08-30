@@ -39,6 +39,7 @@ public class SessionAttribute {
 	public static final String MESSAGE_PAGE_INFO = "messagePageInfo";
 	public static final String PARAMETERS = "parameters";
 	public static final String SPECIAL_OFFERS = "specialOffers";
+	public static final String VIEW_TOUR = "viewTour";
 
 	public static final String ERROR_MESSAGE = "errorMessage";
 	public static final String ERROR_TYPE = "errorType";

@@ -15,6 +15,7 @@ import by.epam.shaturko.controller.command.Command;
 
 public class GoToToursPage implements Command {
 	private final static GoToToursPage INSTANCE = new GoToToursPage();
+	private final static String NO = "NO";
 
 	private GoToToursPage() {
 	}
@@ -23,6 +24,7 @@ public class GoToToursPage implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession(true);
 		session.setAttribute(SessionAttribute.REQUEST_URL, Constant.URL_TO_TOURS_PAGE);		
+		session.removeAttribute(SessionAttribute.VIEW_TOUR);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.TOURS);
 		requestDispatcher.forward(request, response);
 	}

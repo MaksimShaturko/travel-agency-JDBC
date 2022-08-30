@@ -31,6 +31,7 @@ import by.epam.shaturko.validator.UserValidator;
 public class CreateSpecialOffer implements Command {
 	private final static CreateSpecialOffer INSTANCE = new CreateSpecialOffer();
 	private final static String CHOSEN = "chosen";
+	private final static String YES = "yes";
 	private static final Logger logger = LogManager.getLogger();
 
 	private CreateSpecialOffer() {
@@ -51,40 +52,74 @@ public class CreateSpecialOffer implements Command {
 		try {
 			ServiceProvider provider = ServiceProvider.getInstance();
 			ServiceCreateSpecialOffer serviceCreateSO = provider.getServiceCreateSpecialOffer();
-			if (session.getAttribute(SessionAttribute.TOURS_REQUEST) != null
-					&& session.getAttribute(SessionAttribute.TOURS_REQUEST).equals(CHOSEN)) {
-				List<Tour> tours = null;
-				if (request.getParameter(RequestParameter.TOUR_ID) != null) {
+			if (session.getAttribute(SessionAttribute.TOURS_REQUEST) != null) {
+				if (session.getAttribute(SessionAttribute.VIEW_TOUR).equals(YES)) {
+
 					int tourId = Integer.parseInt(request.getParameter(RequestParameter.TOUR_ID));
 					Tour tour = new Tour();
 					tour.setId(tourId);
-					tours = List.of(tour);
-				} else {
-					tours = (List<Tour>) session.getAttribute(SessionAttribute.TOURS_LIST);
-				}
+					List<Tour> tours = List.of(tour);
 
-				if (request.getParameter(RequestParameter.APPLY_SO) != null) {
-					String soTitle = request.getParameter(RequestParameter.SPECIAL_OFFER);
-					serviceCreateSO.createSOByTours(null, tours, soTitle);
-					requestUrl = Constant.URL_TO_MESSAGE_PAGE;
-					session.setAttribute(SessionAttribute.MESSAGE_PAGE_INFO, RequestParameter.APPLY_SO_SUCCESS_MESSAGE);
-					resetAttributes(session);
-				} else {
-					if (UserValidator.isSOParametersValid(parameters)) {
-						SpecialOffer so = new SpecialOffer(titleSO, descSO, Integer.parseInt(discountSO));
-						if (!tours.isEmpty()) {
+					if (request.getParameter(RequestParameter.APPLY_SO) != null) {
+						String soTitle = request.getParameter(RequestParameter.SPECIAL_OFFER);
+						serviceCreateSO.createSOByTours(null, tours, soTitle);
+						requestUrl = Constant.URL_TO_MESSAGE_PAGE;
+						session.setAttribute(SessionAttribute.MESSAGE_PAGE_INFO,
+								RequestParameter.APPLY_SO_SUCCESS_MESSAGE);
+						resetAttributes(session);
+						session.removeAttribute(SessionAttribute.VIEW_TOUR);
+					} else {
+						if (UserValidator.isSOParametersValid(parameters)) {
+							SpecialOffer so = new SpecialOffer(titleSO, descSO, Integer.parseInt(discountSO));
 							session.removeAttribute(SessionAttribute.TOURS_REQUEST);
 							serviceCreateSO.createSOByTours(so, tours, null);
 							requestUrl = Constant.URL_TO_MESSAGE_PAGE;
 							session.setAttribute(SessionAttribute.MESSAGE_PAGE_INFO,
 									RequestParameter.CREATE_APPLY_SO_SUCCESS_MESSAGE);
 							resetAttributes(session);
+							session.removeAttribute(SessionAttribute.VIEW_TOUR);
 						} else {
-							session.removeAttribute(SessionAttribute.TOURS_REQUEST);
-							serviceCreateSO.createSO(so);
+							requestUrl = Constant.URL_TO_VIEW_TOUR + parameters.get(Constant.MESSAGE);
 						}
-					} else {
-						requestUrl = Constant.URL_TO_TOURS_PAGE + parameters.get(Constant.MESSAGE);
+					}
+					System.out.println("############");
+				} else {
+					if (session.getAttribute(SessionAttribute.TOURS_REQUEST).equals(CHOSEN)) {
+						List<Tour> tours = null;
+						if (request.getParameter(RequestParameter.TOUR_ID) != null) {
+							int tourId = Integer.parseInt(request.getParameter(RequestParameter.TOUR_ID));
+							Tour tour = new Tour();
+							tour.setId(tourId);
+							tours = List.of(tour);
+						} else {
+							tours = (List<Tour>) session.getAttribute(SessionAttribute.TOURS_LIST);
+						}
+						if (request.getParameter(RequestParameter.APPLY_SO) != null) {
+							String soTitle = request.getParameter(RequestParameter.SPECIAL_OFFER);
+							serviceCreateSO.createSOByTours(null, tours, soTitle);
+							requestUrl = Constant.URL_TO_MESSAGE_PAGE;
+							session.setAttribute(SessionAttribute.MESSAGE_PAGE_INFO,
+									RequestParameter.APPLY_SO_SUCCESS_MESSAGE);
+							resetAttributes(session);
+						} else {
+							if (UserValidator.isSOParametersValid(parameters)) {
+								SpecialOffer so = new SpecialOffer(titleSO, descSO, Integer.parseInt(discountSO));
+								if (!tours.isEmpty()) {
+									session.removeAttribute(SessionAttribute.TOURS_REQUEST);
+									serviceCreateSO.createSOByTours(so, tours, null);
+									requestUrl = Constant.URL_TO_MESSAGE_PAGE;
+									session.setAttribute(SessionAttribute.MESSAGE_PAGE_INFO,
+											RequestParameter.CREATE_APPLY_SO_SUCCESS_MESSAGE);
+									resetAttributes(session);
+								} else {
+									session.removeAttribute(SessionAttribute.TOURS_REQUEST);
+									serviceCreateSO.createSO(so);
+								}
+							} else {
+								requestUrl = Constant.URL_TO_TOURS_PAGE + parameters.get(Constant.MESSAGE);
+							}
+						}
+
 					}
 				}
 			} else {
@@ -135,7 +170,7 @@ public class CreateSpecialOffer implements Command {
 										RequestParameter.APPLY_SO_SUCCESS_MESSAGE);
 								resetAttributes(session);
 							} else {
-								if (UserValidator.isSOParametersValid(parameters)) {	
+								if (UserValidator.isSOParametersValid(parameters)) {
 									SpecialOffer so = new SpecialOffer(titleSO, descSO, Integer.parseInt(discountSO));
 									serviceCreateSO.createSOByCountries(so, countryNames, null);
 									requestUrl = Constant.URL_TO_MESSAGE_PAGE;
@@ -225,7 +260,7 @@ public class CreateSpecialOffer implements Command {
 							resetAttributes(session);
 						} else {
 
-							if (UserValidator.isSOParametersValid(parameters)) {	
+							if (UserValidator.isSOParametersValid(parameters)) {
 								SpecialOffer so = new SpecialOffer(titleSO, descSO, Integer.parseInt(discountSO));
 								serviceCreateSO.createSOByCities(so,
 										(String[]) session.getAttribute(SessionAttribute.CHOSEN_CITIES_NAMES), null);
@@ -269,7 +304,7 @@ public class CreateSpecialOffer implements Command {
 		}
 		response.sendRedirect(requestUrl);
 	}
-	
+
 	private void resetAttributes(HttpSession session) {
 		session.removeAttribute(SessionAttribute.SHOW_COUNTRIES);
 		session.setAttribute(SessionAttribute.SHOW_CITIES, false);

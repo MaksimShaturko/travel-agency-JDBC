@@ -65,6 +65,27 @@
 	var="message_write" />
 <fmt:message bundle="${loc}" key="tour_page.message_send"
 	var="message_send" />
+	<fmt:message bundle="${loc}" key="spec.title_invalid"
+	var="title_invalid" />
+<fmt:message bundle="${loc}" key="spec.description_invalid"
+	var="desc_invalid" />
+<fmt:message bundle="${loc}" key="spec.parameters_invalid"
+	var="params_invalid" />
+<fmt:message bundle="${loc}" key="spec.discount_invalid"
+	var="discount_invalid" />
+<fmt:message bundle="${loc}" key="spec.parameters_and_discount_invalid"
+	var="params_and_discount_invalid" />
+	<fmt:message bundle="${loc}" key="spec.choose_so_from_list"
+	var="choose_from_list" />
+<fmt:message bundle="${loc}" key="spec.create_for_list_or_create"
+	var="create_for_list" />
+<fmt:message bundle="${loc}" key="spec.or" var="orr" />
+<fmt:message bundle="${loc}" key="tours_page.create_and_apply"
+	var="create_and_apply" />
+	<fmt:message bundle="${loc}" key="spec.title" var="spec_title" />
+<fmt:message bundle="${loc}" key="spec.description" var="spec_desc" />
+<fmt:message bundle="${loc}" key="spec.discount" var="spec_disc" />
+<fmt:message bundle="${loc}" key="tours_page.apply" var="apply" />
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -202,72 +223,73 @@
 		<br> <br>
 
 		<c:if
-			test="${!requestScope.freeTour || (requestScope.freeTour && sessionScope.user.role=='ADMIN')}">			
+			test="${!requestScope.freeTour || (requestScope.freeTour && sessionScope.user.role=='ADMIN')}">
 			<c:if test="${!sessionScope.messages==null}">
-			<table border="1">
-				<tr>
-					<td>${message_datetime}</td>
-					<td>${message_from}</td>
-					<td>${message_text}</td>
-				</tr>
-				<c:forEach items="${sessionScope.messages}" var="message">
+				<table border="1">
 					<tr>
-						<td>${message.dateTime}</td>
-						<c:if test="${sessionScope.user.role == 'CLIENT'}">
-							<c:if test="${message.user.role == 'CLIENT'}">
-								<c:if test="${sessionScope.user.id == message.user.id}">
-									<td>${sessionScope.user.details.name}
-										${sessionScope.user.details.surname} (Вы)</td>
-								</c:if>
-								<c:if test="${sessionScope.user.id != message.user.id}">
-									<td>${sessionScope.user.details.name}</td>
-								</c:if>
-							</c:if>
-							<c:if test="${message.user.role == 'ADMIN'}">
-								<td>${manager}</td>
-							</c:if>
-						</c:if>
-						<c:if test="${sessionScope.user.role == 'ADMIN'}">
-							<c:if test="${message.user.role == 'CLIENT'}">
-								<td>${message.user.details.name}
-									${message.user.details.surname}</td>
-							</c:if>
-							<c:if test="${message.user.role == 'ADMIN'}">
-								<c:if test="${sessionScope.user.id == message.user.id}">
-									<td>${manager_you}</td>
-								</c:if>
-								<c:if test="${sessionScope.user.id != message.user.id}">
-									<td>${sessionScope.user.details.name}
-										${sessionScope.user.details.surname} (${another_manger})</td>
-								</c:if>
-							</c:if>
-						</c:if>
-						<td>${message.text}</td>
+						<td>${message_datetime}</td>
+						<td>${message_from}</td>
+						<td>${message_text}</td>
 					</tr>
-				</c:forEach>
-			</table>
+					<c:forEach items="${sessionScope.messages}" var="message">
+						<tr>
+							<td>${message.dateTime}</td>
+							<c:if test="${sessionScope.user.role == 'CLIENT'}">
+								<c:if test="${message.user.role == 'CLIENT'}">
+									<c:if test="${sessionScope.user.id == message.user.id}">
+										<td>${sessionScope.user.details.name}
+											${sessionScope.user.details.surname} (Вы)</td>
+									</c:if>
+									<c:if test="${sessionScope.user.id != message.user.id}">
+										<td>${sessionScope.user.details.name}</td>
+									</c:if>
+								</c:if>
+								<c:if test="${message.user.role == 'ADMIN'}">
+									<td>${manager}</td>
+								</c:if>
+							</c:if>
+							<c:if test="${sessionScope.user.role == 'ADMIN'}">
+								<c:if test="${message.user.role == 'CLIENT'}">
+									<td>${message.user.details.name}
+										${message.user.details.surname}</td>
+								</c:if>
+								<c:if test="${message.user.role == 'ADMIN'}">
+									<c:if test="${sessionScope.user.id == message.user.id}">
+										<td>${manager_you}</td>
+									</c:if>
+									<c:if test="${sessionScope.user.id != message.user.id}">
+										<td>${sessionScope.user.details.name}
+											${sessionScope.user.details.surname} (${another_manger})</td>
+									</c:if>
+								</c:if>
+							</c:if>
+							<td>${message.text}</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>
-			
-			
+
+
 			<c:if
 				test="${requestScope.freeTour && sessionScope.user.role == 'ADMIN'}">
-				
-
-				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="create_special_offer" />
-					<input type="hidden" name="tourId"
-						value="${sessionScope.orderedTour.id}" /> <input type="text"
-						name="title" placeholder="${spec_title}" /><input type="text"
-						name="description" placeholder="${spec_desc}" /> <input
-						type="text" name="discount" placeholder="${spec_disc}" /> <input
-						type="submit" value="${spec_create_apply}" /><br>
-				</form>
-				
-				
+				<div class="into-main-div-so">
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="create_special_offer" />
+						<input type="hidden" name="tourId" value="${param.tourId}"/>
+						<div class="main-text-so">${choose_from_list}:</div>
+						<select name="specialOffer">
+							<c:forEach items="${sessionScope.specialOffers}" var="so">
+								<option>${so.title}</option>
+							</c:forEach>
+						</select> <input class="so-button-apply" type="submit" name="applySO"
+							value="${apply}" />
+					</form>
+				</div>
 				<div class="into-main-div-so-2">
 					<div class="title-so">${create_for_list}</div>
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="create_special_offer" />
+						<input type="hidden" name="tourId" value="${param.tourId}"/>
 						<div class="main-text-so">${spec_title}</div>
 						<input type="text" name="title" value="${parameters['title']}"
 							minlength="5" maxlength="50" />
@@ -299,8 +321,11 @@
 							value="${create_and_apply}" /><br>
 					</form>
 				</div>
-				
-				
+
+
+
+
+
 			</c:if>
 
 			<c:if test="${!requestScope.freeTour}">

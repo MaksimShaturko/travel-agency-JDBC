@@ -53,6 +53,7 @@
 <fmt:message bundle="${loc}" key="spec.apply" var="apply" />
 <fmt:message bundle="${loc}" key="spec.create_and_apply"
 	var="create_and_apply" />
+	
 <html>
 <head>
 <meta charset="UTF-8">

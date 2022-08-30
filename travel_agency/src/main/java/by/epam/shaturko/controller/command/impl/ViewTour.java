@@ -32,6 +32,7 @@ public class ViewTour implements Command {
 	private final static Logger logger = LogManager.getLogger();
 	private final static String ADMIN = "ADMIN";
 	private final static String CLIENT = "CLIENT";
+	private final static String YES = "yes";
 
 	private ViewTour() {
 	}
@@ -80,6 +81,7 @@ public class ViewTour implements Command {
 			session.setAttribute(SessionAttribute.ERROR_MESSAGE, e);
 			response.sendRedirect(Constant.ERROR_COMMAND);
 		}
+		session.setAttribute(SessionAttribute.VIEW_TOUR, YES);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.TOUR);
 		requestDispatcher.forward(request, response);
 	}
