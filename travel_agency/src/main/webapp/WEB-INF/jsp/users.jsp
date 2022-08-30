@@ -38,40 +38,39 @@
 	<header>
 		<jsp:include page="header.jsp" />
 	</header>
-	<br>
-
-	<table border="1">
-		<tr>
-			<td>${login}</td>
-			<td>${email}</td>
-			<td>${name}</td>
-			<td>${surname}</td>
-			<td>${phone}</td>
-			<td>${number_visited_tours}</td>
-			<td>${loyal_discount}</td>
-			<td>${addit_discount}</td>
-		</tr>
-		<c:forEach items="${sessionScope.listOfUsers}" var="user">
+	<div class="main-div">
+		<table border="1">
 			<tr>
-				<td>${user.login}</td>
-				<td>${user.email}</td>
-				<td>${user.details.name}</td>
-				<td>${user.details.surname}</td>
-				<td>${user.details.phoneNumber}</td>
-				<td>${user.details.numberOfVisitedTours}</td>
-				<td>${user.details.loyalityDiscount}</td>
-				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="change_agency_discount" />
-					<input type="hidden" name="details_id" value="${user.details.id}" />
-					<td>${user.details.agencyAdditionalDiscount}</td>
-					<td><input type="text" name="extra"
-						placeholder="${enter_addit_discount}" /> <input type="submit"
-						value="${set_discount}" /></td>
-				</form>
+				<td>${login}</td>
+				<td>${email}</td>
+				<td>${name}</td>
+				<td>${surname}</td>
+				<td>${phone}</td>
+				<td>${number_visited_tours}</td>
+				<td>${loyal_discount}</td>
+				<td>${addit_discount}</td>
 			</tr>
-		</c:forEach>
-	</table>
-	<br>
+			<c:forEach items="${sessionScope.listOfUsers}" var="user">
+				<tr>
+					<td>${user.login}</td>
+					<td>${user.email}</td>
+					<td>${user.details.name}</td>
+					<td>${user.details.surname}</td>
+					<td>${user.details.phoneNumber}</td>
+					<td>${user.details.numberOfVisitedTours}</td>
+					<td>${user.details.loyalityDiscount}</td>
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="change_agency_discount" />
+						<input type="hidden" name="details_id" value="${user.details.id}" />
+						<td>${user.details.agencyAdditionalDiscount}</td>
+						<td><input type="text" name="extra"
+							placeholder="${enter_addit_discount}" /> <input class="button-discount" type="submit"
+							value="${set_discount}" /></td>
+					</form>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 	<footer>
 		<jsp:include page="footer.jsp" />
 	</footer>

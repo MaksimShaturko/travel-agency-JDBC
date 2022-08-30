@@ -69,6 +69,15 @@ body {
 	padding: 20px, 20px, 20px, 20px;
 }
 
+.main-div-tours {
+	border: 2px solid black;
+	background-color: #8CDAFF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px, 20px, 20px, 20px;
+}
+
 .main-div .into-main-div {
 	padding-top: 60px;
 	padding-left: 50px;
@@ -76,6 +85,17 @@ body {
 }
 
 .main-div .into-main-div-so {
+	border: 2px solid #BFA744;
+	padding: 30px;
+	font-size: 16px;
+	align-self: center;
+	background-color: #FFE786;
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.main-div-tours .into-main-div-so {
 	border: 2px solid #BFA744;
 	padding: 30px;
 	font-size: 16px;
@@ -98,7 +118,23 @@ body {
 	background-color: #FFE786;
 }
 
+.main-div-tours .into-main-div-so-2 {
+	border: 2px solid #BFA744;
+	padding: 30px;
+	font-size: 16px;
+	align-self: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: #FFE786;
+}
+
 .main-div .into-main-div-so-2 .message-so {
+	font-size: 12px;
+}
+
+.main-div-tours .into-main-div-so-2 .message-so {
 	font-size: 12px;
 }
 
@@ -133,6 +169,60 @@ body {
 	cursor: pointer;
 }
 
+.main-div .button-discount {
+	display: block;
+	width: 150px;
+	height: 2em;
+	margin-left: auto;
+	margin-right: auto; 
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color : #FF8694;
+	font: inherit;
+	font-size: 14px;
+}
+
+.main-div .button-discount:hover {
+	display: block;
+	width: 150px;
+	height: 2em;
+	margin-left: auto;
+	margin-right: auto; 
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #BF4452;
+	font: inherit;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.main-div-tours .button-discount {
+	display: block;
+	width: 150px;
+	height: 2em;
+	margin-left: auto;
+	margin-right: auto; 
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color : #FF8694;
+	font: inherit;
+	font-size: 14px;
+}
+
+.main-div-tours .button-discount:hover {
+	display: block;
+	width: 150px;
+	height: 2em;
+	margin-left: auto;
+	margin-right: auto; 
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #BF4452;
+	font: inherit;
+	font-size: 14px;
+	cursor: pointer;
+}
+
 .main-div .into-main-div-so .so-button:hover {
 	display: block;
 	width: 150px;
@@ -156,7 +246,32 @@ body {
 	margin-right: auto;
 }
 
+.main-div-tours .into-main-div-so .so-button-apply {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #FF8694;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .main-div .into-main-div-so .so-button-apply:hover {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #BF4452;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.main-div-tours .into-main-div-so .so-button-apply:hover {
 	display: block;
 	width: 200px;
 	height: 40px;
@@ -186,7 +301,28 @@ body {
 	margin-right: auto;
 }
 
+.main-div-tours .into-main-div-so-2 .so-button-2 {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #FF8694;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .main-div .into-main-div-so-2 .so-button-2:hover {
+	background-color: #BF4452;
+	cursor: pointer;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-div-tours .into-main-div-so-2 .so-button-2:hover {
 	background-color: #BF4452;
 	cursor: pointer;
 	font: inherit;
@@ -204,7 +340,18 @@ body {
 	font-size: 16px;
 }
 
+.main-div-tours .into-main-div-so .main-text-so {
+	font-size: 20px;
+}
+
 .main-div .into-main-div-so-2 .title-so {
+	font-size: 20px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-div-tours .into-main-div-so-2 .title-so {
 	font-size: 20px;
 	margin-bottom: 20px;
 	margin-left: auto;
@@ -217,6 +364,10 @@ body {
 }
 
 .main-div .into-main-div-so-2 .main-text-so {
+	font-size: 16px;
+}
+
+.main-div-tours .into-main-div-so-2 .main-text-so {
 	font-size: 16px;
 }
 

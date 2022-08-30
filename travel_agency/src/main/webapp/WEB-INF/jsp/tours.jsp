@@ -89,121 +89,107 @@ ${title_visited}
 	<header>
 		<jsp:include page="header.jsp" />
 	</header>
-	<br>
-	<c:if test="${sessionScope.toursRequest == 'ordered'}">
-		<table border="1">
-			<tr>
-				<td>${location}</td>
-				<td>${hotel_image}</td>
-				<td>${start_date}</td>
-				<td>${return_date}</td>
-				<td>${stars}</td>
-				<td>${room}</td>
-				<td>${food}</td>
-				<td>${placement}</td>
-				<td>${purchase_price}</td>
-			</tr>
-			<c:forEach items="${sessionScope.toursList}" var="tour">
-				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="view_tour" /> <input
-						type="hidden" name="tourId" value="${tour.id}" />
-					<tr>
-						<td>${just_country}:${tour.hotel.city.country.name}<br>
-							${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
-							${tour.hotel.name}
-						</td>
-						<td><img
-							style="object-fit: cover; height: 200px; width: 250px"
-							src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
-							alt="${tour.hotel.description}" /></td>
-						<td>${tour.dateOfDeparture}</td>
-						<td>${tour.dateOfReturn}</td>
-						<td>${tour.hotel.stars}</td>
-						<td>${tour.room}</td>
-						<td>${tour.food}</td>
-						<td>${tour.placement}</td>
-						<td>${tour.realPrice}</td>
-						<td><input type="submit" value="${open_tour}" /></td>
-				</form>
-				<c:if test="${sessionScope.role == 'ADMIN' }">
-					<td><form action="Controller" method="post">
-							<input type="hidden" name="command" value="set_tour_as_visited" />
-							<input type="hidden" name="tourId" value="${tour.id}" />
-							<td><input type="submit" value="${mark_as_visited}" /></td>
-						</form></td>
-				</c:if>
+	<div class="main-div-tours">
+
+		<c:if test="${sessionScope.toursRequest == 'ordered'}">
+			<table border="1">
+				<tr>
+					<td>${location}</td>
+					<td>${hotel_image}</td>
+					<td>${start_date}</td>
+					<td>${return_date}</td>
+					<td>${stars}</td>
+					<td>${room}</td>
+					<td>${food}</td>
+					<td>${placement}</td>
+					<td>${purchase_price}</td>
 				</tr>
-			</c:forEach>
-		</table>
-	</c:if>
-
-	<c:if test="${sessionScope.toursRequest == 'chosen'}">
-		<c:if test="${sessionScope.role == 'ADMIN' }">
-			<br>
-			<div>
-				<c:if test="${param.message=='messageNoCountries'}">
-					${no_countries}
-			</c:if>
-				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="create_special_offer" />
-
-					${choose_from_list}: <select name="specialOffer">
-						<c:forEach items="${sessionScope.specialOffers}" var="so">
-							<option>${so.title}</option>
-						</c:forEach>
-					</select> <input type="submit" name="applySO" value="${apply}" />
-				</form>
-			</div>
-			<br> ${orr} <br>
-			<br> ${create_for_list}<br>
-
-			<c:if test="${param.message=='titleInvalid'}">
-				${title_invalid}
-			</c:if>
-			<c:if test="${param.message=='descriptionInvalid'}">
-					${desc_invalid}
-			</c:if>
-			<c:if test="${param.message=='parametersInvalid'}">
-					${params_invalid}
-			</c:if>
-			<c:if test="${param.message=='discountInvalid'}">
-					${discount_invalid}
-			</c:if>
-			<c:if test="${param.message=='parameters_and_discountInvalid'}">
-					${params_and_discount_invalid}
-			</c:if>
-			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="create_special_offer" />
-				<br>${spec_title}<br> <input type="text" name="title"
-					value="${parameters['title']}" minlength="5" maxlength="50" /> <br>${spec_desc}<br>
-				<input type="text" name="description"
-					value="${parameters['description']}" minlength="5" maxlength="1000" />
-				<br>${spec_disc}<br> <input type="number" name="discount"
-					value="${parameters['discount']}" min="1" max="99" /> <br> <br>
-				<input type="submit" value="${create_and_apply}" /><br>
-			</form>
-			<br>
-		</c:if>
-		<table border="1">
-			<tr>
-				<td>${location}</td>
-				<td>${hotel_image}</td>
-				<td>${stars}</td>
-				<td>${start_date}</td>
-				<td>${return_date}</td>
-				<td>${room}</td>
-				<td>${food}</td>
-				<td>${placement}</td>
-				<td>${start_price}</td>
-				<td>${so_discount}</td>
-				<td>${user_discount}</td>
-				<td>${price_with_discounts}</td>
-			</tr>
-			<c:forEach items="${sessionScope.toursList}" var="tour">
-				<c:if test="${sessionScope.role == 'ADMIN' }">
+				<c:forEach items="${sessionScope.toursList}" var="tour">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="view_tour" /> <input
 							type="hidden" name="tourId" value="${tour.id}" />
+						<tr>
+							<td>${just_country}:${tour.hotel.city.country.name}<br>
+								${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+								${tour.hotel.name}
+							</td>
+							<td><img
+								style="object-fit: cover; height: 200px; width: 250px"
+								src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+								alt="${tour.hotel.description}" /></td>
+							<td>${tour.dateOfDeparture}</td>
+							<td>${tour.dateOfReturn}</td>
+							<td>${tour.hotel.stars}</td>
+							<td>${tour.room}</td>
+							<td>${tour.food}</td>
+							<td>${tour.placement}</td>
+							<td>${tour.realPrice}</td>
+							<td><input class="button-discount" type="submit"
+								value="${open_tour}" /></td>
+					</form>
+					<c:if test="${sessionScope.role == 'ADMIN' }">
+						<td><form action="Controller" method="post">
+								<input type="hidden" name="command" value="set_tour_as_visited" />
+								<input type="hidden" name="tourId" value="${tour.id}" />
+								<td><input class="button-discount" type="submit"
+									value="${mark_as_visited}" /></td>
+							</form></td>
+					</c:if>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:if>
+
+		<c:if test="${sessionScope.toursRequest == 'chosen'}">
+
+
+			<table border="1">
+				<tr>
+					<td>${location}</td>
+					<td>${hotel_image}</td>
+					<td>${stars}</td>
+					<td>${start_date}</td>
+					<td>${return_date}</td>
+					<td>${room}</td>
+					<td>${food}</td>
+					<td>${placement}</td>
+					<td>${start_price}</td>
+					<td>${so_discount}</td>
+					<td>${user_discount}</td>
+					<td>${price_with_discounts}</td>
+				</tr>
+				<c:forEach items="${sessionScope.toursList}" var="tour">
+					<c:if test="${sessionScope.role == 'ADMIN' }">
+						<form action="Controller" method="post">
+							<input type="hidden" name="command" value="view_tour" /> <input
+								type="hidden" name="tourId" value="${tour.id}" />
+							<tr>
+								<td>${just_country}:${tour.hotel.city.country.name}<br>
+									${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+									${tour.hotel.name}
+								</td>
+								<td><img
+									style="object-fit: cover; height: 200px; width: 250px"
+									src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+									alt="${tour.hotel.description}" /></td>
+								<td>${tour.hotel.stars}</td>
+								<td>${tour.dateOfDeparture}</td>
+								<td>${tour.dateOfReturn}</td>
+								<td>${tour.room}</td>
+								<td>${tour.food}</td>
+								<td>${tour.placement}</td>
+								<td>${tour.priceStart}</td>
+								<td>${tour.specialOffer.discount}</td>
+								<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
+								<td>${tour.realPrice}</td>
+								<c:if test="${sessionScope.role == 'CLIENT' }">
+								</c:if>
+								<td><input class="button-discount" type="submit"
+									value="${open_tour}" /></td>
+							</tr>
+						</form>
+					</c:if>
+					<c:if test="${sessionScope.role == 'CLIENT' }">
 						<tr>
 							<td>${just_country}:${tour.hotel.city.country.name}<br>
 								${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
@@ -223,15 +209,87 @@ ${title_visited}
 							<td>${tour.specialOffer.discount}</td>
 							<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
 							<td>${tour.realPrice}</td>
-							<c:if test="${sessionScope.role == 'CLIENT' }">
-							</c:if>
-							<td><input type="submit" value="${open_tour}" /></td>
+							<td><form action="Controller" method="post">
+									<input type="hidden" name="command" value="order_tour" /> <input
+										type="hidden" name="tourId" value="${tour.id}" /> <input class="button-discount"
+										type="submit" value="${order_tour}" />
+								</form> <br>
+								<form action="Controller" method="post">
+									<input type="hidden" name="command" value="view_tour" /> <input
+										type="hidden" name="tourId" value="${tour.id}" /> <input
+										class="button-discount" type="submit" value="${open_tour}" />
+								</form></td>
 						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+			<c:if test="${sessionScope.role == 'ADMIN'}">
+				<br>
+				<div class="into-main-div-so">
+					<c:if test="${param.message=='messageNoCountries'}">
+					${no_countries}
+			</c:if>
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="create_special_offer" />
+						<div class="main-text-so">${choose_from_list}:</div> <select name="specialOffer">
+							<c:forEach items="${sessionScope.specialOffers}" var="so">
+								<option>${so.title}</option>
+							</c:forEach>
+						</select> <input class="so-button-apply" type="submit" name="applySO"
+							value="${apply}" />
 					</form>
+				</div>
+				<div class="into-main-div-so-2">
+					<div class="title-so">${create_for_list}</div>
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="create_special_offer" />
+						<div class="main-text-so">${spec_title}</div>
+						<input type="text" name="title" value="${parameters['title']}"
+							minlength="5" maxlength="50" />
+						<div class="main-text-so">${spec_desc}</div>
+						<input type="text" name="description"
+							value="${parameters['description']}" minlength="5"
+							maxlength="1000" />
+						<div class="main-text-so">${spec_disc}</div>
+						<input type="number" name="discount"
+							value="${parameters['discount']}" min="1" max="99" />
+						<div class="message-so">
+							<c:if test="${param.message=='titleInvalid'}">
+				${title_invalid}
+			</c:if>
+							<c:if test="${param.message=='descriptionInvalid'}">
+					${desc_invalid}
+			</c:if>
+							<c:if test="${param.message=='parametersInvalid'}">
+					${params_invalid}
+			</c:if>
+							<c:if test="${param.message=='discountInvalid'}">
+					${discount_invalid}
+			</c:if>
+							<c:if test="${param.message=='parameters_and_discountInvalid'}">
+					${params_and_discount_invalid}
+			</c:if>
+						</div>
+						<input class="so-button-2" type="submit"
+							value="${create_and_apply}" /><br>
+					</form>
+				</div>
+			</c:if>
+		</c:if>
 
-				</c:if>
-
-				<c:if test="${sessionScope.role == 'CLIENT' }">
+		<c:if test="${sessionScope.toursRequest == 'visited'}">
+			<table border="1">
+				<tr>
+					<td>${location}</td>
+					<td>${hotel_image}</td>
+					<td>${stars}</td>
+					<td>${start_date}</td>
+					<td>${return_date}</td>
+					<td>${room}</td>
+					<td>${food}</td>
+					<td>${placement}</td>
+				</tr>
+				<c:forEach items="${sessionScope.toursList}" var="tour">
 					<tr>
 						<td>${just_country}:${tour.hotel.city.country.name}<br>
 							${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
@@ -247,61 +305,15 @@ ${title_visited}
 						<td>${tour.room}</td>
 						<td>${tour.food}</td>
 						<td>${tour.placement}</td>
-						<td>${tour.priceStart}</td>
-						<td>${tour.specialOffer.discount}</td>
-						<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
-						<td>${tour.realPrice}</td>
-						<td><form action="Controller" method="post">
-								<input type="hidden" name="command" value="order_tour" /> <input
-									type="hidden" name="tourId" value="${tour.id}" /> <input
-									type="submit" value="${order_tour}" />
-							</form> <br>
-							<form action="Controller" method="post">
-								<input type="hidden" name="command" value="view_tour" /> <input
-									type="hidden" name="tourId" value="${tour.id}" /> <input
-									type="submit" value="${open_tour}" />
-							</form></td>
 					</tr>
-				</c:if>
-			</c:forEach>
-		</table>
-	</c:if>
-
-	<c:if test="${sessionScope.toursRequest == 'visited'}">
-		<table border="1">
-			<tr>
-				<td>${location}</td>
-				<td>${hotel_image}</td>
-				<td>${stars}</td>
-				<td>${start_date}</td>
-				<td>${return_date}</td>
-				<td>${room}</td>
-				<td>${food}</td>
-				<td>${placement}</td>
-			</tr>
-			<c:forEach items="${sessionScope.toursList}" var="tour">
-				<tr>
-					<td>${just_country}:${tour.hotel.city.country.name}<br>
-						${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
-						${tour.hotel.name}
-					</td>
-					<td><img
-						style="object-fit: cover; height: 200px; width: 250px"
-						src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
-						alt="${tour.hotel.description}" /></td>
-					<td>${tour.hotel.stars}</td>
-					<td>${tour.dateOfDeparture}</td>
-					<td>${tour.dateOfReturn}</td>
-					<td>${tour.room}</td>
-					<td>${tour.food}</td>
-					<td>${tour.placement}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</c:if>
-	<c:if test="${sessionScope.toursRequest == 'isEmpty'}">
+				</c:forEach>
+			</table>
+		</c:if>
+		<c:if test="${sessionScope.toursRequest == 'isEmpty'}">
 	${message_no_tours}
 	</c:if>
+	</div>
+
 	<footer>
 		<jsp:include page="footer.jsp" />
 	</footer>
