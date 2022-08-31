@@ -25,6 +25,7 @@ public class GetOrderedTours implements Command {
 	private final static GetOrderedTours INSTANCE = new GetOrderedTours();
 	private final static Logger logger = LogManager.getLogger();
 	private final static String ORDERED = "ordered";
+	private final static int TEN = 10;
 	private final static String EMPTY = "isEmpty";
 
 	private GetOrderedTours() {
@@ -51,6 +52,7 @@ public class GetOrderedTours implements Command {
 			session.setAttribute(SessionAttribute.ERROR_MESSAGE, e);
 			requestUrl = Constant.ERROR_COMMAND;
 		}
+		session.setAttribute(SessionAttribute.ON_ONE_PAGE, TEN);
 		response.sendRedirect(requestUrl);
 	}
 

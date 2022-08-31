@@ -39,6 +39,10 @@ public class RequestParameter {
 	public static final String TOUR = "tour";
 	public static final String APPLY_SO = "applySO";
 	public static final String SPECIAL_OFFER = "specialOffer";
+	public static final String PAGE_NUMBER = "pageNumber";
+	public static final String TOURS_ON_PAGE = "toursOnPage";
+	public static final String PREVIOUS = "previous";
+	public static final String NEXT = "next";
 	
 	public static final String ACCESS_ERROR_MESSAGE = "accessError";
 	public static final String REGISTRATION_SUCCESS_MESSAGE = "registrationSuccess";

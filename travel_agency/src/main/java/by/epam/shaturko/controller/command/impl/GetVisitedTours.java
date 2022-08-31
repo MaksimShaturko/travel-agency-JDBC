@@ -25,6 +25,7 @@ public class GetVisitedTours implements Command{
 	private final static GetVisitedTours INSTANCE = new GetVisitedTours();
 	private final static Logger logger = LogManager.getLogger();
 	private final static String VISITED = "visited";
+	private final static int TEN = 10;
 	
 	private GetVisitedTours() {}
 
@@ -45,6 +46,7 @@ public class GetVisitedTours implements Command{
 			session.setAttribute(SessionAttribute.ERROR_MESSAGE, e);
 			requestUrl = Constant.ERROR_COMMAND;
 		}		
+		session.setAttribute(SessionAttribute.ON_ONE_PAGE, TEN);
 		response.sendRedirect(requestUrl);		
 	}
 	

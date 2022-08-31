@@ -33,6 +33,7 @@ public class GetChosenTours implements Command {
 	private final static String EMPTY_STRING = "";
 	private final static String MIN_PRICE = "0";
 	private final static String MAX_PRICE = "100000";
+	private final static int TEN = 10;
 	private final static String CHOSEN = "chosen";
 	private final static ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private final static ServiceGettingData SERVICE_GETTING_DATA = PROVIDER.getServiceGettingData();
@@ -86,6 +87,7 @@ public class GetChosenTours implements Command {
 			session.setAttribute(SessionAttribute.ERROR_MESSAGE, e);
 			requestUrl = Constant.ERROR_COMMAND;
 		}
+		session.setAttribute(SessionAttribute.ON_ONE_PAGE, TEN);
 		response.sendRedirect(requestUrl);
 	}
 
