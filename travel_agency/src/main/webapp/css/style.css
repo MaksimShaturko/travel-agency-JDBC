@@ -458,6 +458,27 @@ body {
 	margin-right: auto;
 }
 
+.main-div-tours .pagination {
+	font-size: 12px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.main-div-tours .pagination .button-scroll-page{
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 2px solid #8CDAFF;
+	background-color: #8CDAFF;
+}
+
+.main-div-tours .pagination .button-scroll-page:hover{
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 2px solid #4A99BF;
+	cursor: pointer;
+	
+}
+
 .footer-div {
 	border: 2px solid black;
 	background-color: #BF4452;

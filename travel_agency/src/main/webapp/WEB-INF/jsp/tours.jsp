@@ -104,7 +104,7 @@ ${title_visited}
 					<td>${placement}</td>
 					<td>${purchase_price}</td>
 				</tr>
-				<c:forEach items="${sessionScope.toursList}" var="tour">
+				<c:forEach items="${requestScope.toursOnPage}" var="tour">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="view_tour" /> <input
 							type="hidden" name="tourId" value="${tour.id}" />
@@ -142,7 +142,6 @@ ${title_visited}
 
 		<c:if test="${sessionScope.toursRequest == 'chosen'}">
 
-
 			<table border="1">
 				<tr>
 					<td>${location}</td>
@@ -158,7 +157,7 @@ ${title_visited}
 					<td>${user_discount}</td>
 					<td>${price_with_discounts}</td>
 				</tr>
-				<c:forEach items="${sessionScope.toursList}" var="tour">
+				<c:forEach items="${requestScope.toursOnPage}" var="tour">
 					<c:if test="${sessionScope.role == 'ADMIN' }">
 						<form action="Controller" method="post">
 							<input type="hidden" name="command" value="view_tour" /> <input
@@ -211,8 +210,8 @@ ${title_visited}
 							<td>${tour.realPrice}</td>
 							<td><form action="Controller" method="post">
 									<input type="hidden" name="command" value="order_tour" /> <input
-										type="hidden" name="tourId" value="${tour.id}" /> <input class="button-discount"
-										type="submit" value="${order_tour}" />
+										type="hidden" name="tourId" value="${tour.id}" /> <input
+										class="button-discount" type="submit" value="${order_tour}" />
 								</form> <br>
 								<form action="Controller" method="post">
 									<input type="hidden" name="command" value="view_tour" /> <input
@@ -223,6 +222,59 @@ ${title_visited}
 					</c:if>
 				</c:forEach>
 			</table>
+
+
+
+
+		</c:if>
+
+		<c:if test="${sessionScope.toursRequest == 'visited'}">
+			<table border="1">
+				<tr>
+					<td>${location}</td>
+					<td>${hotel_image}</td>
+					<td>${stars}</td>
+					<td>${start_date}</td>
+					<td>${return_date}</td>
+					<td>${room}</td>
+					<td>${food}</td>
+					<td>${placement}</td>
+				</tr>
+				<c:forEach items="${requestScope.toursOnPage}" var="tour">
+					<tr>
+						<td>${just_country}:${tour.hotel.city.country.name}<br>
+							${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+							${tour.hotel.name}
+						</td>
+						<td><img
+							style="object-fit: cover; height: 200px; width: 250px"
+							src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+							alt="${tour.hotel.description}" /></td>
+						<td>${tour.hotel.stars}</td>
+						<td>${tour.dateOfDeparture}</td>
+						<td>${tour.dateOfReturn}</td>
+						<td>${tour.room}</td>
+						<td>${tour.food}</td>
+						<td>${tour.placement}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:if>
+
+		<div class="pagination">
+			<c:if test="${requestScope.previous != null}">
+				<button class="button-scroll-page"
+					onclick="window.location.href = 'Controller?command=go_to_tours_page&pageNumber=${requestScope.pageNumber - 1}'"><</button>
+			</c:if>
+			${requestScope.pageNumber}
+			<c:if test="${requestScope.next != null}">
+				<button class="button-scroll-page"
+					onclick="window.location.href = 'Controller?command=go_to_tours_page&pageNumber=${requestScope.pageNumber + 1}'">></button>
+			</c:if>
+		</div>
+
+
+		<c:if test="${sessionScope.toursRequest == 'chosen'}">
 			<c:if test="${sessionScope.role == 'ADMIN'}">
 				<br>
 				<div class="into-main-div-so">
@@ -231,7 +283,8 @@ ${title_visited}
 			</c:if>
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="create_special_offer" />
-						<div class="main-text-so">${choose_from_list}:</div> <select name="specialOffer">
+						<div class="main-text-so">${choose_from_list}:</div>
+						<select name="specialOffer">
 							<c:forEach items="${sessionScope.specialOffers}" var="so">
 								<option>${so.title}</option>
 							</c:forEach>
@@ -277,38 +330,8 @@ ${title_visited}
 			</c:if>
 		</c:if>
 
-		<c:if test="${sessionScope.toursRequest == 'visited'}">
-			<table border="1">
-				<tr>
-					<td>${location}</td>
-					<td>${hotel_image}</td>
-					<td>${stars}</td>
-					<td>${start_date}</td>
-					<td>${return_date}</td>
-					<td>${room}</td>
-					<td>${food}</td>
-					<td>${placement}</td>
-				</tr>
-				<c:forEach items="${sessionScope.toursList}" var="tour">
-					<tr>
-						<td>${just_country}:${tour.hotel.city.country.name}<br>
-							${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
-							${tour.hotel.name}
-						</td>
-						<td><img
-							style="object-fit: cover; height: 200px; width: 250px"
-							src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
-							alt="${tour.hotel.description}" /></td>
-						<td>${tour.hotel.stars}</td>
-						<td>${tour.dateOfDeparture}</td>
-						<td>${tour.dateOfReturn}</td>
-						<td>${tour.room}</td>
-						<td>${tour.food}</td>
-						<td>${tour.placement}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</c:if>
+
+
 		<c:if test="${sessionScope.toursRequest == 'isEmpty'}">
 	${message_no_tours}
 	</c:if>

@@ -80,7 +80,6 @@ public class CreateSpecialOffer implements Command {
 							requestUrl = Constant.URL_TO_VIEW_TOUR + parameters.get(Constant.MESSAGE);
 						}
 					}
-					System.out.println("############");
 				} else {
 					if (session.getAttribute(SessionAttribute.TOURS_REQUEST).equals(CHOSEN)) {
 						List<Tour> tours = null;

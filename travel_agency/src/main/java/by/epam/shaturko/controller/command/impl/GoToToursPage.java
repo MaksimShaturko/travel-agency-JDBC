@@ -29,10 +29,16 @@ public class GoToToursPage implements Command {
 		HttpSession session = request.getSession(true);
 		session.setAttribute(SessionAttribute.REQUEST_URL, Constant.URL_TO_TOURS_PAGE);
 		session.removeAttribute(SessionAttribute.VIEW_TOUR);
-
 		int toursOnOnePage = (int) session.getAttribute(SessionAttribute.ON_ONE_PAGE);
 		List<Tour> tours = (List<Tour>) session.getAttribute(SessionAttribute.TOURS_LIST);
-		int pages = tours.size() / toursOnOnePage + 1;
+		int pages;
+		System.out.println("size = " + tours.size());
+		System.out.println("toursOnOnePage = " + toursOnOnePage);
+		if (tours.size() % toursOnOnePage == 0) {
+			pages = tours.size() / toursOnOnePage;
+		} else {
+			pages = tours.size() / toursOnOnePage + 1;
+		}
 		int pageNumber;
 		if (request.getParameter(RequestParameter.PAGE_NUMBER) != null) {
 			pageNumber = Integer.parseInt(request.getParameter(RequestParameter.PAGE_NUMBER));
@@ -41,22 +47,26 @@ public class GoToToursPage implements Command {
 		}
 		List<Tour> toursOnPage = new ArrayList<>();
 		for (int i = pageNumber * toursOnOnePage - toursOnOnePage; i < pageNumber * toursOnOnePage; i++) {
-			if (i >= tours.size() - 1) {
+			if (i > tours.size() - 1) {
 				break;
 			}
 			toursOnPage.add(tours.get(i));
-		}				
-		if(pageNumber == 1) {
+		}
+		System.out.println(toursOnPage);
+		System.out.println("pageNumber = " + pageNumber);
+		System.out.println("pages = " + pages);
+		if (pageNumber == 1 && toursOnOnePage < tours.size()) {
 			request.setAttribute(RequestParameter.NEXT, YES);
 		}
-		if(pageNumber == pages) {
+		if (pageNumber == pages && pageNumber != 1) {
 			request.setAttribute(RequestParameter.PREVIOUS, YES);
 		}
-		if(pageNumber < pages && pageNumber > 1) {
+		if (pageNumber < pages && pageNumber > 1) {
 			request.setAttribute(RequestParameter.PREVIOUS, YES);
 			request.setAttribute(RequestParameter.NEXT, YES);
 		}
-		request.setAttribute(RequestParameter.TOURS_ON_PAGE, toursOnPage);		
+		request.setAttribute(RequestParameter.TOURS_ON_PAGE, toursOnPage);
+		request.setAttribute(RequestParameter.PAGE_NUMBER, pageNumber);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.TOURS);
 		requestDispatcher.forward(request, response);
 	}
