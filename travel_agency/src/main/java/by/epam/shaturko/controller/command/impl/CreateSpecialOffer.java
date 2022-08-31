@@ -53,13 +53,11 @@ public class CreateSpecialOffer implements Command {
 			ServiceProvider provider = ServiceProvider.getInstance();
 			ServiceCreateSpecialOffer serviceCreateSO = provider.getServiceCreateSpecialOffer();
 			if (session.getAttribute(SessionAttribute.TOURS_REQUEST) != null) {
-				if (session.getAttribute(SessionAttribute.VIEW_TOUR).equals(YES)) {
-
+				if (session.getAttribute(SessionAttribute.VIEW_TOUR) != null) {
 					int tourId = Integer.parseInt(request.getParameter(RequestParameter.TOUR_ID));
 					Tour tour = new Tour();
 					tour.setId(tourId);
 					List<Tour> tours = List.of(tour);
-
 					if (request.getParameter(RequestParameter.APPLY_SO) != null) {
 						String soTitle = request.getParameter(RequestParameter.SPECIAL_OFFER);
 						serviceCreateSO.createSOByTours(null, tours, soTitle);

@@ -33,7 +33,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
-
 <body>
 	<main class="main">
 		<div class="navbar">

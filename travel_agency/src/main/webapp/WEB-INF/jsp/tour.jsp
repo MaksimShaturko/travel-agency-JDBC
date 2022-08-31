@@ -321,13 +321,7 @@
 							value="${create_and_apply}" /><br>
 					</form>
 				</div>
-
-
-
-
-
 			</c:if>
-
 			<c:if test="${!requestScope.freeTour}">
 				<br> ${message_write}:<br>
 				<form action="Controller" method="post">
