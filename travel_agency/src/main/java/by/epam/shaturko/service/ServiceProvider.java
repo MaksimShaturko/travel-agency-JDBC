@@ -7,6 +7,7 @@ import by.epam.shaturko.service.impl.ServiceAuthorizationImpl;
 import by.epam.shaturko.service.impl.ServiceChangingDataImpl;
 import by.epam.shaturko.service.impl.ServiceCreateSpecialOfferImpl;
 import by.epam.shaturko.service.impl.ServiceGettingDataImpl;
+import by.epam.shaturko.service.impl.ServiceGettingSOToursImpl;
 import by.epam.shaturko.service.impl.ServiceOrderTourImpl;
 import by.epam.shaturko.service.impl.ServiceWriteMessageImpl;
 
@@ -104,5 +105,14 @@ public class ServiceProvider {
 		serviceWriteMessage = new ServiceWriteMessageImpl();
 
 		return serviceWriteMessage;
+	}
+	
+	public ServiceGettingSOTours getServiceGettingSOTours() {
+
+		ServiceGettingSOTours serviceGettingSOTours;
+
+		serviceGettingSOTours = new ServiceGettingSOToursImpl();
+
+		return serviceGettingSOTours;
 	}
 }
