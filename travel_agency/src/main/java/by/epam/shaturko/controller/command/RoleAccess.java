@@ -36,7 +36,8 @@ public enum RoleAccess {
 			CommandName.ORDER_TOUR,
 			CommandName.VIEW_TOUR,
 			CommandName.WRITE_MESSAGE,
-			CommandName.GO_TO_MESSAGE_PAGE)),
+			CommandName.GO_TO_MESSAGE_PAGE,
+			CommandName.GO_TO_ALL_SO_PAGE)),
 	
 	/**
      * Admin role access.
@@ -57,7 +58,8 @@ public enum RoleAccess {
 			CommandName.SET_TOUR_AS_VISITED,
 			CommandName.VIEW_TOUR,
 			CommandName.WRITE_MESSAGE,
-			CommandName.GO_TO_MESSAGE_PAGE));	
+			CommandName.GO_TO_MESSAGE_PAGE,
+			CommandName.GO_TO_ALL_SO_PAGE));	
 	
 	private Set<CommandName> accessCommands;
 	
