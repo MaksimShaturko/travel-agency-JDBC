@@ -20,6 +20,8 @@ import by.epam.shaturko.entity.tour.Tour;
 public class GoToToursPage implements Command {
 	private final static GoToToursPage INSTANCE = new GoToToursPage();
 	private final static String YES = "YES";
+	private final static String UP = "up";
+	private final static String DOWN = "down";
 
 	private GoToToursPage() {
 	}
@@ -31,9 +33,12 @@ public class GoToToursPage implements Command {
 		session.removeAttribute(SessionAttribute.VIEW_TOUR);
 		int toursOnOnePage = (int) session.getAttribute(SessionAttribute.ON_ONE_PAGE);
 		List<Tour> tours = (List<Tour>) session.getAttribute(SessionAttribute.TOURS_LIST);
+		String sort = request.getParameter(RequestParameter.SORT);
+		if (sort != null) {
+			tours = sort(sort, tours, session);
+			session.setAttribute(SessionAttribute.TOURS_LIST, tours);
+		}
 		int pages;
-		System.out.println("size = " + tours.size());
-		System.out.println("toursOnOnePage = " + toursOnOnePage);
 		if (tours.size() % toursOnOnePage == 0) {
 			pages = tours.size() / toursOnOnePage;
 		} else {
@@ -52,9 +57,6 @@ public class GoToToursPage implements Command {
 			}
 			toursOnPage.add(tours.get(i));
 		}
-		System.out.println(toursOnPage);
-		System.out.println("pageNumber = " + pageNumber);
-		System.out.println("pages = " + pages);
 		if (pageNumber == 1 && toursOnOnePage < tours.size()) {
 			request.setAttribute(RequestParameter.NEXT, YES);
 		}
@@ -69,6 +71,16 @@ public class GoToToursPage implements Command {
 		request.setAttribute(RequestParameter.PAGE_NUMBER, pageNumber);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(PagePath.TOURS);
 		requestDispatcher.forward(request, response);
+	}
+
+	private List<Tour> sort(String sort, List<Tour> tours, HttpSession session) {
+		if (sort.equals(UP)) {
+			tours.sort((t1, t2) -> Double.compare(t1.getRealPrice(), t2.getRealPrice()));
+		}
+		if (sort.equals(DOWN)) {
+			tours.sort((t1, t2) -> -Double.compare(t1.getRealPrice(), t2.getRealPrice()));
+		}
+		return tours;
 	}
 
 	public static GoToToursPage getInstance() {

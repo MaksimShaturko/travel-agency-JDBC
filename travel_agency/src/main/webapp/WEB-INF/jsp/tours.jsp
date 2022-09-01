@@ -74,6 +74,8 @@
 	var="title_ordered" />
 <fmt:message bundle="${loc}" key="tours_page.title_visited"
 	var="title_visited" />
+<fmt:message bundle="${loc}" key="tours_page.sort_by_price"
+	var="sort_by_price" />
 <html>
 <head>
 <meta charset="UTF-8">
@@ -102,7 +104,13 @@ ${title_visited}
 					<td>${room}</td>
 					<td>${food}</td>
 					<td>${placement}</td>
-					<td>${purchase_price}</td>
+					<td>${purchase_price}<br>
+					<button class="button-scroll-page"
+							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=up'">
+							&#129045;</button>
+						<button class="button-scroll-page"
+							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=down'">
+							&#129047;</button></td>					
 				</tr>
 				<c:forEach items="${requestScope.toursOnPage}" var="tour">
 					<form action="Controller" method="post">
@@ -155,7 +163,13 @@ ${title_visited}
 					<td>${start_price}</td>
 					<td>${so_discount}</td>
 					<td>${user_discount}</td>
-					<td>${price_with_discounts}</td>
+					<td>${price_with_discounts}<br>
+					<button class="button-scroll-page"
+							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=up'">
+							&#129045;</button>
+						<button class="button-scroll-page"
+							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=down'">
+							&#129047;</button></td>
 				</tr>
 				<c:forEach items="${requestScope.toursOnPage}" var="tour">
 					<c:if test="${sessionScope.role == 'ADMIN' }">

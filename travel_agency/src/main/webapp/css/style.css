@@ -174,10 +174,10 @@ body {
 	width: 150px;
 	height: 2em;
 	margin-left: auto;
-	margin-right: auto; 
+	margin-right: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color : #FF8694;
+	background-color: #FF8694;
 	font: inherit;
 	font-size: 14px;
 }
@@ -187,7 +187,7 @@ body {
 	width: 150px;
 	height: 2em;
 	margin-left: auto;
-	margin-right: auto; 
+	margin-right: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background-color: #BF4452;
@@ -201,10 +201,10 @@ body {
 	width: 150px;
 	height: 2em;
 	margin-left: auto;
-	margin-right: auto; 
+	margin-right: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color : #FF8694;
+	background-color: #FF8694;
 	font: inherit;
 	font-size: 14px;
 }
@@ -214,7 +214,7 @@ body {
 	width: 150px;
 	height: 2em;
 	margin-left: auto;
-	margin-right: auto; 
+	margin-right: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background-color: #BF4452;
@@ -464,19 +464,29 @@ body {
 	margin-bottom: 20px;
 }
 
-.main-div-tours .pagination .button-scroll-page{
+.button-scroll-page {
+	font-size: 14px; border : 2px solid #8CDAFF;
+	background-color: #8CDAFF;
+	border: 2px solid #8CDAFF;
+}
+
+.button-scroll-page:hover {
+	border: 2px solid #4A99BF;
+	cursor: pointer;
+}
+
+.main-div-tours .pagination .button-scroll-page {
 	margin-left: 10px;
 	margin-right: 10px;
 	border: 2px solid #8CDAFF;
 	background-color: #8CDAFF;
 }
 
-.main-div-tours .pagination .button-scroll-page:hover{
+.main-div-tours .pagination .button-scroll-page:hover {
 	margin-left: 10px;
 	margin-right: 10px;
 	border: 2px solid #4A99BF;
 	cursor: pointer;
-	
 }
 
 .footer-div {
