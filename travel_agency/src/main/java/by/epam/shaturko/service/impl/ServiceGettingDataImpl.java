@@ -236,4 +236,42 @@ public class ServiceGettingDataImpl implements ServiceGettingData {
 		}
 	}
 
+	@Override
+	public List<Tour> getToursBySOId(User user, int SOId) throws ServiceException {
+		try {
+			ThreadLocal<Connection> threadLocal = TRANSACTION.startTransaction();
+			List<Tour> tours = GETTING_DATA_DAO.getToursBySOId(threadLocal, user, SOId);
+			TRANSACTION.commitTransaction();
+			return tours;
+		} catch (TransactionException e) {
+			throw new ServiceException(e);
+		} catch (DAOException e) {
+			try {
+				TRANSACTION.rollbackTransaction();
+			} catch (TransactionException e1) {
+				throw new ServiceException(e1);
+			}
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public List<Tour> getAllSOTours(User user) throws ServiceException {
+		try {
+			ThreadLocal<Connection> threadLocal = TRANSACTION.startTransaction();
+			List<Tour> tours = GETTING_DATA_DAO.getAllSOTours(threadLocal, user);
+			TRANSACTION.commitTransaction();
+			return tours;
+		} catch (TransactionException e) {
+			throw new ServiceException(e);
+		} catch (DAOException e) {
+			try {
+				TRANSACTION.rollbackTransaction();
+			} catch (TransactionException e1) {
+				throw new ServiceException(e1);
+			}
+			throw new ServiceException(e);
+		}
+	}
+
 }

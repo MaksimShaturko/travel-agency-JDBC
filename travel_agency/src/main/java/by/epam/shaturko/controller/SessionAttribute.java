@@ -41,6 +41,7 @@ public class SessionAttribute {
 	public static final String SPECIAL_OFFERS = "specialOffers";
 	public static final String VIEW_TOUR = "viewTour";
 	public static final String ON_ONE_PAGE = "onOnePage";
+	public static final String ALL_SO = "allSO";
 
 	public static final String ERROR_MESSAGE = "errorMessage";
 	public static final String ERROR_TYPE = "errorType";

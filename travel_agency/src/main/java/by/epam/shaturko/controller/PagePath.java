@@ -10,6 +10,7 @@ public class PagePath {
 	 public static final String TOUR = "/WEB-INF/jsp/tour.jsp";
 	 public static final String TOURS = "/WEB-INF/jsp/tours.jsp";
 	 public static final String CREATING_SO = "/WEB-INF/jsp/creating_so.jsp";
+	 public static final String ALL_SO = "/WEB-INF/jsp/all_so.jsp";
 	 
 	 private PagePath() {		 
 	 }

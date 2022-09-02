@@ -7,8 +7,6 @@
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.local" var="loc"></fmt:setBundle>
 
-<fmt:message bundle="${loc}" key="locale_label.ru" var="locale_ru" />
-<fmt:message bundle="${loc}" key="locale_label.en" var="locale_en" />
 <fmt:message bundle="${loc}" key="spec.title" var="spec_title" />
 <fmt:message bundle="${loc}" key="spec.description" var="spec_desc" />
 <fmt:message bundle="${loc}" key="spec.discount" var="spec_disc" />

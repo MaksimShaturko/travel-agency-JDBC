@@ -26,6 +26,7 @@ import by.epam.shaturko.controller.command.impl.SetTourAsVisited;
 import by.epam.shaturko.controller.command.impl.ViewTour;
 import by.epam.shaturko.controller.command.impl.WriteMessage;
 import by.epam.shaturko.controller.command.impl.GetSOTours;
+import by.epam.shaturko.controller.command.impl.GetAllSO;
 
 /**
  * The CommandName enum represents command name.
@@ -58,6 +59,7 @@ public enum CommandName {
 	SET_TOUR_AS_VISITED(SetTourAsVisited.getInstance()), 
 	GET_VISITED_TOURS(GetVisitedTours.getInstance()),
 	GO_TO_MESSAGE_PAGE(GoToMessagePage.getInstance()),
+	GET_ALL_SO(GetAllSO.getInstance()),
 	GO_TO_ALL_SO_PAGE(GoToAllSOPage.getInstance()),
 	GET_SO_TOURS(GetSOTours.getInstance()),
 	ERROR_COMMAND(ErrorCommand.getInstance());

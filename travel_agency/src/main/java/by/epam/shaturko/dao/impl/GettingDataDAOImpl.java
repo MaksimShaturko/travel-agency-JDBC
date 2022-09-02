@@ -77,6 +77,8 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 			+ "ON(us.user_details_id = det.details_id) WHERE us.user_id=?";
 	private final static String GET_VISITED_TOURS_BY_USER_ID = "SELECT * FROM travel_agency.tours where tour_id IN "
 			+ "(SELECT tour_id from travel_agency.visited_tours where user_id=?)";
+	private final static String GET_TOURS_BY_SO_ID = "SELECT * FROM travel_agency.tours where special_offers_id = ?";
+	private final static String GET_TOURS_WITH_SO_ID = "SELECT * FROM travel_agency.tours where special_offers_id is not null";
 
 	@Override
 	public List<String> getListOfCountriesNames(ThreadLocal<Connection> threadLocal) throws DAOException {
@@ -106,7 +108,7 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 				(String) requestParameters.get(RequestParameter.TYPE_OF_PLACEMENT));
 		Map<Integer, Hotel> mapIdHotel = getMapIdHotel(hotelsList);
 		String hotelIdsForQuery = getIdsForQuery(mapIdHotel.keySet());
-		
+
 		try (PreparedStatement ps = connection.prepareStatement(GET_CHOSEN_TOUR_PART1 + typeOfPlacement
 				+ GET_CHOSEN_TOUR_PART2 + roomForTourQuery + GET_CHOSEN_TOUR_PART3 + foodForTourQuery
 				+ GET_CHOSEN_TOUR_PART4 + hotelIdsForQuery + GET_CHOSEN_TOUR_PART5)) {
@@ -174,6 +176,49 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 			return toursList;
 		} catch (SQLException e) {
 			throw new DAOException("Error while getting the chosen tours", e);
+		}
+	}
+
+	public List<Tour> getToursBySOId(ThreadLocal<Connection> threadLocal, User user, int SOId) throws DAOException {
+		Connection connection = threadLocal.get();
+		List<Tour> tours = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(GET_TOURS_BY_SO_ID)) {
+			ps.setInt(1, SOId);
+			ResultSet rs = ps.executeQuery();
+			Map<Integer, SpecialOffer> mapIdSpecial = getMapIdSpecialOffer(connection);
+			Categories[] categories = Categories.values();
+			while (rs.next()) {
+				SpecialOffer specialOffer = mapIdSpecial.get(rs.getInt(ColumnName.TOURS_SPECIAL_OFFERS_ID));
+				double priceStart = rs.getDouble(ColumnName.TOURS_PRICE_START);
+				double discounts = getDiscounts(specialOffer, user);
+				double realPriceWithinDiscounts = Math.round(priceStart * (100 - discounts) / 100);
+				Tour tour = getTour(connection, rs, priceStart, realPriceWithinDiscounts, categories, specialOffer);
+				tours.add(tour);				
+			}
+			return tours;
+		} catch (SQLException e) {
+			throw new DAOException("Error while getting tours by SO id", e);
+		}
+	}
+
+	public List<Tour> getAllSOTours(ThreadLocal<Connection> threadLocal, User user) throws DAOException {
+		Connection connection = threadLocal.get();
+		List<Tour> tours = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(GET_TOURS_WITH_SO_ID)) {	
+			ResultSet rs = ps.executeQuery();
+			Map<Integer, SpecialOffer> mapIdSpecial = getMapIdSpecialOffer(connection);
+			Categories[] categories = Categories.values();
+			while (rs.next()) {
+				SpecialOffer specialOffer = mapIdSpecial.get(rs.getInt(ColumnName.TOURS_SPECIAL_OFFERS_ID));
+				double priceStart = rs.getDouble(ColumnName.TOURS_PRICE_START);
+				double discounts = getDiscounts(specialOffer, user);
+				double realPriceWithinDiscounts = Math.round(priceStart * (100 - discounts) / 100);
+				Tour tour = getTour(connection, rs, priceStart, realPriceWithinDiscounts, categories, specialOffer);
+				tours.add(tour);				
+			}
+			return tours;
+		} catch (SQLException e) {
+			throw new DAOException("Error while getting tours with SO", e);
 		}
 	}
 
@@ -282,9 +327,10 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 					double discounts = 0;
 					if (user.getRole().toString().equals(CLIENT)) {
 						discounts = getDiscounts(specialOffer, user);
-					} 
+					}
 					if (user.getRole().toString().equals(ADMIN)) {
-						discounts = getDiscounts(specialOffer, mapIdOrders.get(rs.getInt(ColumnName.TOURS_TOUR_ID)).getUser());
+						discounts = getDiscounts(specialOffer,
+								mapIdOrders.get(rs.getInt(ColumnName.TOURS_TOUR_ID)).getUser());
 					}
 					double realPriceWithinDiscounts = Math.round(priceStart * (100 - discounts) / 100);
 					Tour tour = getTour(connection, rs, priceStart, realPriceWithinDiscounts, categories, specialOffer);

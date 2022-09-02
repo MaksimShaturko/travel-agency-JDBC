@@ -24,8 +24,10 @@
 <fmt:message bundle="${loc}" key="main_admin_page.all_ordered_tours"
 	var="all_ordered_tours" />
 <fmt:message bundle="${loc}" key="message.log_out" var="log_out" />
-<fmt:message bundle="${loc}" key="main_user_page.user_ordered_tours" var="user_ordered_tours" />
-<fmt:message bundle="${loc}" key="main_user_page.user_visited_tours" var="user_visited_tours" />
+<fmt:message bundle="${loc}" key="main_user_page.user_ordered_tours"
+	var="user_ordered_tours" />
+<fmt:message bundle="${loc}" key="main_user_page.user_visited_tours"
+	var="user_visited_tours" />
 <fmt:message bundle="${loc}" key="message.all_so" var="all_so" />
 
 <html>
@@ -49,6 +51,14 @@
 						<input type="hidden" name="command"
 							value="go_to_registration_page" /> <input class="nav-submit"
 							type="submit" value="${register_message}" />
+					</form>
+				</div>
+				</c:if>
+				<c:if test="${auth}">
+				<div class="nav-button">
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="get_all_so" />
+						<input class="nav-submit" type="submit" value="${all_so}" />
 					</form>
 				</div>
 			</c:if>
@@ -90,12 +100,6 @@
 					</form>
 				</div>
 			</c:if>
-			<div class="nav-button">
-				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="go_to_all_so_page" /> <input
-						class="nav-submit" type="submit" value="${all_so}" />
-				</form>
-			</div>
 			<div class="nav-button-space"></div>
 			<c:if test="${auth}">
 				<div class="nav-button-last">

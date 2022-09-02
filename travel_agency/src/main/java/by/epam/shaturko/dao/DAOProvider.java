@@ -6,7 +6,6 @@ import by.epam.shaturko.dao.impl.CreateSpecialOfferDAOImpl;
 import by.epam.shaturko.dao.impl.FillingDBDAOImpl;
 import by.epam.shaturko.dao.impl.GenerateToursDAOImpl;
 import by.epam.shaturko.dao.impl.GettingDataDAOImpl;
-import by.epam.shaturko.dao.impl.GettingSOToursDAOImpl;
 import by.epam.shaturko.dao.impl.OrderTourDAOImpl;
 import by.epam.shaturko.dao.impl.SaveMessageDAOImpl;
 import by.epam.shaturko.dao.impl.SaveUserDAOImpl;
@@ -106,14 +105,5 @@ public class DAOProvider {
 
 		return saveMessageDAO;
 	}
-	
-	public GettingSOToursDAO getGettingSOToursDAO() {
-
-		GettingSOToursDAO gettingSOToursDAO;
-		gettingSOToursDAO = new GettingSOToursDAOImpl();
-
-		return gettingSOToursDAO;
-	}
-
 
 }

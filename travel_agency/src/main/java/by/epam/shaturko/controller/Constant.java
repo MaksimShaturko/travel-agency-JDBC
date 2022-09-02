@@ -9,6 +9,7 @@ public class Constant {
 	public final static String URL_TO_REGISTRATION_PAGE = "Controller?command=go_to_registration_page";
 	public final static String URL_TO_MESSAGE_PAGE = "Controller?command=go_to_message_page";
 	public final static String URL_TO_VIEW_TOUR = "Controller?command=view_tour";
+	public final static String URL_TO_ALL_SO_PAGE = "Controller?command=go_to_all_so_page";
 	public final static String ERROR_COMMAND = "Controller?command=error_command";
 	public final static String MESSAGE = "message";
 	public final static String MESSAGE_REWRITE_LOGIN = "&message=rewriteLogin";
