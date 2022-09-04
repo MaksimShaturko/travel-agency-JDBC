@@ -63,6 +63,33 @@
 <fmt:message bundle="${loc}" key="main_guest_page.title"
 	var="guest_title" />
 
+<fmt:message bundle="${loc}" key="tours_page.location" var="location" />
+<fmt:message bundle="${loc}" key="tour_page.hotel_image"
+	var="hotel_image" />
+<fmt:message bundle="${loc}" key="tour_page.start_date" var="start_date" />
+<fmt:message bundle="${loc}" key="tour_page.return_date"
+	var="return_date" />
+<fmt:message bundle="${loc}" key="tour_page.stars" var="stars" />
+<fmt:message bundle="${loc}" key="tour_page.room" var="room" />
+<fmt:message bundle="${loc}" key="tour_page.food" var="food" />
+<fmt:message bundle="${loc}" key="tour_page.placement" var="placement" />
+<fmt:message bundle="${loc}" key="tours_page.purchase_price"
+	var="purchase_price" />
+<fmt:message bundle="${loc}" key="tour_page.hotel" var="just_hotel" />
+<fmt:message bundle="${loc}" key="tour_page.country" var="just_country" />
+<fmt:message bundle="${loc}" key="tour_page.city" var="just_city" />
+<fmt:message bundle="${loc}" key="tours_page.open_tour" var="open_tour" />
+<fmt:message bundle="${loc}" key="tours_page.start_price"
+	var="start_price" />
+<fmt:message bundle="${loc}" key="tours_page.so_discount"
+	var="so_discount" />
+<fmt:message bundle="${loc}" key="tours_page.user_discount"
+	var="user_discount" />
+<fmt:message bundle="${loc}" key="tours_page.price_including_discounts"
+	var="price_with_discounts" />
+<fmt:message bundle="${loc}" key="message.special_for_today"
+	var="special_for_today" />
+
 <html>
 <head>
 
@@ -77,7 +104,8 @@ ${guest_title}</c:if> <c:if test="${auth}">
 	<header>
 		<jsp:include page="header.jsp" />
 	</header>
-	<div class="main-div">
+	<div class="main-div-tours">
+
 		<c:if test="${!auth}">
 			<div class="auth-div">
 				<div class="auth-info-message">${auth_to_enter}</div>
@@ -98,67 +126,69 @@ ${guest_title}</c:if> <c:if test="${auth}">
 
 
 		<c:if test="${auth}">
-			<c:if test="${role=='ADMIN'}">
-				<div class="into-main-div">
-					<div class="text2">
-						<a href="Controller?command=filling_db">${filling_db}</a>
-					</div>
-					<div class="text2">
-						<a href="Controller?command=generate_tours">${gen_tours}</a>
-					</div>
-				</div>
-			</c:if>
-			<div class="auth-div">
-				<div class="text">
-					<h3>${select_tour}:</h3>
-				</div>
-				<div class="auth-form">
-					<form action="Controller" method="post">
-						<input type="hidden" name="command" value="get_chosen_tours" />
-						<div class="form-text">${choose_country}:</div>
-						<select name="country">
-							<c:forEach items="${sessionScope.countries}" var="country">
-								<option>${country}</option>
-							</c:forEach>
-						</select>
-						<div class="form-text">${choose_rest}:</div>
-						<select name="category">
-							<c:forEach items="${sessionScope.categories}" var="category">
-								<option>${category}</option>
-							</c:forEach>
-						</select>
-
-						<div class="form-text">${budget}:</div>
-						<div>
-							<input type="text" name="priceFrom" /> - <input type="text"
-								name="priceTo" />
+			<div class="main-div">
+				<c:if test="${role=='ADMIN'}">
+					<div class="into-main-div">
+						<div class="text2">
+							<a href="Controller?command=filling_db">${filling_db}</a>
 						</div>
-						<div class="form-text">${number_of_people}:</div>
-						<div>
-							<select name="numberOfPeople">
-								<c:forEach items="${sessionScope.numbers.keySet()}" var="number">
-									<option>${number}</option>
+						<div class="text2">
+							<a href="Controller?command=generate_tours">${gen_tours}</a>
+						</div>
+					</div>
+				</c:if>
+				<div class="auth-div">
+					<div class="text">
+						<h3>${select_tour}:</h3>
+					</div>
+					<div class="auth-form">
+						<form action="Controller" method="post">
+							<input type="hidden" name="command" value="get_chosen_tours" />
+							<div class="form-text">${choose_country}:</div>
+							<select name="country">
+								<c:forEach items="${sessionScope.countries}" var="country">
+									<option>${country}</option>
 								</c:forEach>
 							</select>
-						</div>
-						<div class="form-text">${date_departure}:</div>
-
-						<div class="form-group">
-							<input type="date" name="dateDeparture" class="form-control">
-						</div>
-						<div class="form-text">${days}:</div>
-						<div>
-							${from} <select name="durationFrom">
-								<c:forEach items="${sessionScope.durations}" var="duration">
-									<option>${duration}</option>
-								</c:forEach>
-							</select> - ${to} <select name="durationTo">
-								<c:forEach items="${sessionScope.durations}" var="duration">
-									<option>${duration}</option>
+							<div class="form-text">${choose_rest}:</div>
+							<select name="category">
+								<c:forEach items="${sessionScope.categories}" var="category">
+									<option>${category}</option>
 								</c:forEach>
 							</select>
-						</div>
-						<%-- 			<div>
+
+							<div class="form-text">${budget}:</div>
+							<div>
+								<input type="text" name="priceFrom" /> - <input type="text"
+									name="priceTo" />
+							</div>
+							<div class="form-text">${number_of_people}:</div>
+							<div>
+								<select name="numberOfPeople">
+									<c:forEach items="${sessionScope.numbers.keySet()}"
+										var="number">
+										<option>${number}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-text">${date_departure}:</div>
+
+							<div class="form-group">
+								<input type="date" name="dateDeparture" class="form-control">
+							</div>
+							<div class="form-text">${days}:</div>
+							<div>
+								${from} <select name="durationFrom">
+									<c:forEach items="${sessionScope.durations}" var="duration">
+										<option>${duration}</option>
+									</c:forEach>
+								</select> - ${to} <select name="durationTo">
+									<c:forEach items="${sessionScope.durations}" var="duration">
+										<option>${duration}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<%-- 			<div>
 				${type_food}:
 				<c:forEach items="${sessionScope.food}" var="foodType">
 					<input type="checkbox" name="food" value="${foodType}">${foodType}</input>
@@ -177,12 +207,109 @@ ${guest_title}</c:if> <c:if test="${auth}">
 				</c:forEach>
 			</div> 
 			--%>
-						<input class="auth-input-submit" type="submit"
-							value="${select_tour}" />
-					</form>
+							<input class="auth-input-submit" type="submit"
+								value="${select_tour}" />
+						</form>
+					</div>
 				</div>
 			</div>
+
+${special_for_today}
+			<div class="main-div-tours">
+				<table border="1">
+					<tr>
+						<td>${location}</td>
+						<td>${hotel_image}</td>
+						<td>${stars}</td>
+						<td>${start_date}</td>
+						<td>${return_date}</td>
+						<td>${room}</td>
+						<td>${food}</td>
+						<td>${placement}</td>
+						<td>${start_price}</td>
+						<td>${so_discount}</td>
+						<td>${user_discount}</td>
+						<td>${price_with_discounts}</td>
+					</tr>
+					<c:forEach items="${sessionScope.toursList}" var="tour">
+						<c:if test="${sessionScope.role == 'ADMIN' }">
+							<form action="Controller" method="post">
+								<input type="hidden" name="command" value="view_tour" /> <input
+									type="hidden" name="tourId" value="${tour.id}" />
+								<tr>
+									<td>${just_country}:${tour.hotel.city.country.name}<br>
+										${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+										${tour.hotel.name}
+									</td>
+									<td><img
+										style="object-fit: cover; height: 200px; width: 250px"
+										src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+										alt="${tour.hotel.description}" /></td>
+									<td>${tour.hotel.stars}</td>
+									<td>${tour.dateOfDeparture}</td>
+									<td>${tour.dateOfReturn}</td>
+									<td>${tour.room}</td>
+									<td>${tour.food}</td>
+									<td>${tour.placement}</td>
+									<td>${tour.priceStart}</td>
+									<td>${tour.specialOffer.discount}</td>
+									<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
+									<td>${tour.realPrice}</td>
+									<c:if test="${sessionScope.role == 'CLIENT' }">
+									</c:if>
+									<td><input class="button-discount" type="submit"
+										value="${open_tour}" /></td>
+								</tr>
+							</form>
+						</c:if>
+						<c:if test="${sessionScope.role == 'CLIENT' }">
+							<tr>
+								<td>${just_country}:${tour.hotel.city.country.name}<br>
+									${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+									${tour.hotel.name}
+								</td>
+								<td><img
+									style="object-fit: cover; height: 200px; width: 250px"
+									src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+									alt="${tour.hotel.description}" /></td>
+								<td>${tour.hotel.stars}</td>
+								<td>${tour.dateOfDeparture}</td>
+								<td>${tour.dateOfReturn}</td>
+								<td>${tour.room}</td>
+								<td>${tour.food}</td>
+								<td>${tour.placement}</td>
+								<td>${tour.priceStart}</td>
+								<td>${tour.specialOffer.discount}</td>
+								<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
+								<td>${tour.realPrice}</td>
+								<td><form action="Controller" method="post">
+										<input type="hidden" name="command" value="order_tour" /> <input
+											type="hidden" name="tourId" value="${tour.id}" /> <input
+											class="button-discount" type="submit" value="${order_tour}" />
+									</form> <br>
+									<form action="Controller" method="post">
+										<input type="hidden" name="command" value="view_tour" /> <input
+											type="hidden" name="tourId" value="${tour.id}" /> <input
+											class="button-discount" type="submit" value="${open_tour}" />
+									</form></td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
+			</div>
+
 		</c:if>
+
+
+
+
+
+
+
+
+
+
+
 	</div>
 	<footer>
 		<jsp:include page="footer.jsp" />

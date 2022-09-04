@@ -38,7 +38,7 @@
 	<header>
 		<jsp:include page="header.jsp" />
 	</header>
-	<div class="main-div">
+	<div class="main-div-users">
 		<table border="1">
 			<tr>
 				<td>${login}</td>

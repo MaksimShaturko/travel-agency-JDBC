@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,9 +22,11 @@ import by.epam.shaturko.controller.PagePath;
 import by.epam.shaturko.controller.SessionAttribute;
 import by.epam.shaturko.controller.command.Command;
 import by.epam.shaturko.entity.tour.Categories;
+import by.epam.shaturko.entity.tour.Tour;
 import by.epam.shaturko.entity.tour.TypeOfFood;
 import by.epam.shaturko.entity.tour.TypeOfPlacement;
 import by.epam.shaturko.entity.tour.TypeOfRoom;
+import by.epam.shaturko.entity.user.User;
 import by.epam.shaturko.service.ServiceGettingData;
 import by.epam.shaturko.service.ServiceProvider;
 import by.epam.shaturko.service.exception.ServiceException;
@@ -47,7 +50,7 @@ public class GoToMainPage implements Command {
 			numbers.put(Integer.toString(i), TypeOfPlacement.values()[i - 1].toString());
 		}
 		numbers.put(ANY, null);
-		
+
 		HttpSession session = request.getSession();
 		ServiceProvider provider = ServiceProvider.getInstance();
 		ServiceGettingData serviceGettingData = provider.getServiceGettingData();
@@ -61,6 +64,17 @@ public class GoToMainPage implements Command {
 			session.setAttribute(SessionAttribute.CATEGORIES, Categories.values());
 			session.setAttribute(SessionAttribute.COUNTRIES, listOfCountriesNames);
 			session.setAttribute(SessionAttribute.NUMBERS, numbers);
+
+			User user = (User) session.getAttribute(SessionAttribute.USER);
+			if (user != null) {
+				List<Tour> allTours = serviceGettingData.getAllSOTours(user);
+				List<Tour> tours = new ArrayList<>();
+				Random random = new Random();
+				for (int i = 0; i < 5; i++) {
+					tours.add(allTours.get(random.nextInt(allTours.size())));					
+				}
+				session.setAttribute(SessionAttribute.TOURS_LIST, tours);
+			}
 			session.removeAttribute(SessionAttribute.TOURS_REQUEST);
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "Error while getting list of countries names", e);

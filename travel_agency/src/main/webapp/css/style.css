@@ -61,6 +61,15 @@ body {
 }
 
 .main-div {
+	background-color: #8CDAFF;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 20px, 20px, 20px, 20px;
+	width: 100%;
+}
+
+.main-div-users {
 	border: 2px solid black;
 	background-color: #8CDAFF;
 	display: flex;
@@ -79,6 +88,12 @@ body {
 }
 
 .main-div .into-main-div {
+	padding-top: 60px;
+	padding-left: 50px;
+	align-self: flex-start;
+}
+
+.main-div-tours .main-div .into-main-div {
 	padding-top: 60px;
 	padding-left: 50px;
 	align-self: flex-start;
@@ -398,6 +413,23 @@ body {
 	background-color: #FFE786;
 }
 
+.main-div-tours .auth-div {
+	border: 2px solid #BFA744;
+	padding: 20px 30px 30px 20px;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	align-self: center;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	background-color: #FFE786;
+}
+
 .main-div .auth-div .auth-info-message {
 	font-size: 20px;
 }
@@ -465,7 +497,8 @@ body {
 }
 
 .button-scroll-page {
-	font-size: 14px; border : 2px solid #8CDAFF;
+	font-size: 14px;
+	border: 2px solid #8CDAFF;
 	background-color: #8CDAFF;
 	border: 2px solid #8CDAFF;
 }
