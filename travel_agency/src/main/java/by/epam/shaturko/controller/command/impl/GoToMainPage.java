@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +37,10 @@ import by.epam.shaturko.service.exception.ServiceException;
 public class GoToMainPage implements Command {
 	private final static GoToMainPage INSTANCE = new GoToMainPage();
 	private final static Logger logger = LogManager.getLogger();
-	private final static String ANY = "any";
+	private final static String RU = "ru";
+	private final static String BUNDLE = "localization.local";
+	private final static String KEY = "main_page.any";
+	private final static String KEY_2 = "main_page.any_2";
 
 	private GoToMainPage() {
 	}
@@ -49,14 +55,21 @@ public class GoToMainPage implements Command {
 		for (int i = 1; i < 5; i++) {
 			numbers.put(Integer.toString(i), TypeOfPlacement.values()[i - 1].toString());
 		}
-		numbers.put(ANY, null);
-
 		HttpSession session = request.getSession();
+		String localeStr;
+		if(session.getAttribute(SessionAttribute.LOCALE) != null) {
+			localeStr = (String) session.getAttribute(SessionAttribute.LOCALE);			
+		} else {
+			localeStr = RU;
+		}
+		Locale locale = new Locale(localeStr);		
+		ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE, locale);
+		numbers.put(bundle.getString(KEY), null);
 		ServiceProvider provider = ServiceProvider.getInstance();
 		ServiceGettingData serviceGettingData = provider.getServiceGettingData();
 		try {
 			List<String> listOfCountriesNames = serviceGettingData.getListOfCountriesNames();
-			listOfCountriesNames.add(ANY);
+			listOfCountriesNames.add(bundle.getString(KEY_2));
 			session.setAttribute(SessionAttribute.REQUEST_URL, Constant.URL_TO_MAIN_PAGE);
 			session.setAttribute(SessionAttribute.DURATIONS, listOfDurations);
 			session.setAttribute(SessionAttribute.FOOD, TypeOfFood.values());
@@ -72,7 +85,7 @@ public class GoToMainPage implements Command {
 				List<Tour> tours = new ArrayList<>();
 				Random random = new Random();
 				for (int i = 0; i < 5; i++) {
-					tours.add(allTours.get(random.nextInt(allTours.size())));					
+					tours.add(allTours.get(random.nextInt(allTours.size())));
 				}
 				session.setAttribute(SessionAttribute.TOURS_LIST, tours);
 			}

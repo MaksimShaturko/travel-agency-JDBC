@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -59,9 +60,12 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 	private final static String GET_CHOSEN_TOUR_PART5 = " AND status = 'free' AND category_id = ?";
 	private final static String GET_ORDERED_TOURS = "SELECT * FROM travel_agency.tours where tour_id IN ";
 	private final static String GET_COUNTRY_BY_NAME = "SELECT * from travel_agency.countries where name = ?";
+	private final static String GET_CITIES = "SELECT city_id, name, description, image_path from travel_agency.cities where country_id IN (?)";
 	private final static String GET_COUNTRY_BY_ID = "SELECT * from travel_agency.countries where country_id = ?";
 	private final static String GET_HOTEL_BY_ID = "SELECT hotel_id, name, description, image_path, stars, city_id from travel_agency.hotels where hotel_id=?";
 	private final static String GET_HOTEL_BY_CITY_IDS = "SELECT hotel_id, name, description, image_path, stars, city_id from travel_agency.hotels where city_id IN ";
+	private final static String GET_ALL_HOTELS = "SELECT * from travel_agency.hotels hot JOIN travel_agency.cities cit "
+			+ "ON(hot.city_id = cit.city_id) JOIN travel_agency.countries con ON(cit.country_id = con.country_id)";
 	private final static String EMPTY_STRING = "";
 	private final static String GET_TOUR_ID_FOR_CLIENT = "SELECT tour_id FROM travel_agency.tour_orders where user_id=? AND order_status='ACTIVE'";
 	private final static String GET_TOUR_ID_FOR_ADMIN = "SELECT tour_id FROM travel_agency.tour_orders where order_status='ACTIVE'";
@@ -81,6 +85,8 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 	private final static String GET_TOURS_WITH_SO_ID = "SELECT * FROM travel_agency.tours where special_offers_id is not null";
 	private final static String WITH_SO = " AND special_offers_id is not null";
 	private final static String EMPTY = "";
+	private final static String ANY_ENG = "Any";
+	private final static String ANY_RU = "Любая";
 
 	@Override
 	public List<String> getListOfCountriesNames(ThreadLocal<Connection> threadLocal) throws DAOException {
@@ -101,9 +107,19 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 	public List<Tour> getListOfChosenTours(ThreadLocal<Connection> threadLocal, Map<String, Object> requestParameters,
 			User user) throws DAOException {
 		Connection connection = threadLocal.get();
-		Country country = getCountry(connection, (String) requestParameters.get(RequestParameter.COUNTRY_NAME));
-		List<City> citiesList = getCities(connection, country);
-		List<Hotel> hotelsList = getHotels(connection, citiesList);
+		List<String> listOfCountriesNames;
+		List<City> citiesList;
+		List<Hotel> hotelsList;
+		if (requestParameters.get(RequestParameter.COUNTRY_NAME).equals(ANY_ENG)
+				|| requestParameters.get(RequestParameter.COUNTRY_NAME).equals(ANY_RU)) {
+			listOfCountriesNames = getListOfCountriesNames(threadLocal);
+			citiesList = getListOfCities(threadLocal, listOfCountriesNames.toArray(new String[0]));
+			hotelsList = getHotels(connection, citiesList);
+		} else {
+			Country country = getCountry(connection, (String) requestParameters.get(RequestParameter.COUNTRY_NAME));
+			citiesList = getCities(connection, country);
+			hotelsList = getHotels(connection, citiesList);
+		}
 		String roomForTourQuery = getRoomForTourQuery((String[]) requestParameters.get(RequestParameter.ROOM_TYPE));
 		String foodForTourQuery = getFoodForTourQuery((String[]) requestParameters.get(RequestParameter.FOOD));
 		String typeOfPlacement = getTypeOfPlacementsForTourQuery(
@@ -632,7 +648,6 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 			Country country = new Country(rs.getInt(ColumnName.COUNTRIES_COUNTRY_ID),
 					rs.getString(ColumnName.COUNTRIES_NAME), rs.getString(ColumnName.COUNTRIES_DESCRIPTION),
 					rs.getString(ColumnName.COUNTRIES_FLAG_IMAGE_PATH));
-
 			return country;
 		} catch (SQLException e) {
 			throw new DAOException("Error while getting a country", e);
@@ -641,8 +656,7 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 
 	private List<City> getCities(Connection connection, Country country) throws DAOException {
 		List<City> citiesList = new ArrayList<>();
-		try (PreparedStatement ps = connection.prepareStatement(
-				"SELECT city_id, name, description, image_path from travel_agency.cities where country_id IN (?)")) {
+		try (PreparedStatement ps = connection.prepareStatement(GET_CITIES)) {
 			ps.setInt(1, country.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
