@@ -45,6 +45,7 @@ public class RequestParameter {
 	public static final String NEXT = "next";
 	public static final String SORT = "sort";
 	public static final String SO_ID = "SOId";
+	public static final String ONLY_SO = "onlySO";
 	
 	public static final String ACCESS_ERROR_MESSAGE = "accessError";
 	public static final String REGISTRATION_SUCCESS_MESSAGE = "registrationSuccess";

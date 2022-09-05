@@ -79,6 +79,8 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 			+ "(SELECT tour_id from travel_agency.visited_tours where user_id=?)";
 	private final static String GET_TOURS_BY_SO_ID = "SELECT * FROM travel_agency.tours where special_offers_id = ?";
 	private final static String GET_TOURS_WITH_SO_ID = "SELECT * FROM travel_agency.tours where special_offers_id is not null";
+	private final static String WITH_SO = " AND special_offers_id is not null";
+	private final static String EMPTY = "";
 
 	@Override
 	public List<String> getListOfCountriesNames(ThreadLocal<Connection> threadLocal) throws DAOException {
@@ -108,10 +110,16 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 				(String) requestParameters.get(RequestParameter.TYPE_OF_PLACEMENT));
 		Map<Integer, Hotel> mapIdHotel = getMapIdHotel(hotelsList);
 		String hotelIdsForQuery = getIdsForQuery(mapIdHotel.keySet());
+		String withSO;
+		if (requestParameters.get(RequestParameter.ONLY_SO) != null) {
+			withSO = WITH_SO;
+		} else {
+			withSO = EMPTY;
+		}
 
 		try (PreparedStatement ps = connection.prepareStatement(GET_CHOSEN_TOUR_PART1 + typeOfPlacement
 				+ GET_CHOSEN_TOUR_PART2 + roomForTourQuery + GET_CHOSEN_TOUR_PART3 + foodForTourQuery
-				+ GET_CHOSEN_TOUR_PART4 + hotelIdsForQuery + GET_CHOSEN_TOUR_PART5)) {
+				+ GET_CHOSEN_TOUR_PART4 + hotelIdsForQuery + GET_CHOSEN_TOUR_PART5 + withSO)) {
 			LocalDate date = LocalDate.parse((String) requestParameters.get(RequestParameter.DEPARTURE_DATE));
 			Date dateDeparture = Date.valueOf(date);
 
@@ -193,7 +201,7 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 				double discounts = getDiscounts(specialOffer, user);
 				double realPriceWithinDiscounts = Math.round(priceStart * (100 - discounts) / 100);
 				Tour tour = getTour(connection, rs, priceStart, realPriceWithinDiscounts, categories, specialOffer);
-				tours.add(tour);				
+				tours.add(tour);
 			}
 			return tours;
 		} catch (SQLException e) {
@@ -204,7 +212,7 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 	public List<Tour> getAllSOTours(ThreadLocal<Connection> threadLocal, User user) throws DAOException {
 		Connection connection = threadLocal.get();
 		List<Tour> tours = new ArrayList<>();
-		try (PreparedStatement ps = connection.prepareStatement(GET_TOURS_WITH_SO_ID)) {	
+		try (PreparedStatement ps = connection.prepareStatement(GET_TOURS_WITH_SO_ID)) {
 			ResultSet rs = ps.executeQuery();
 			Map<Integer, SpecialOffer> mapIdSpecial = getMapIdSpecialOffer(connection);
 			Categories[] categories = Categories.values();
@@ -214,7 +222,7 @@ public class GettingDataDAOImpl implements GettingDataDAO {
 				double discounts = getDiscounts(specialOffer, user);
 				double realPriceWithinDiscounts = Math.round(priceStart * (100 - discounts) / 100);
 				Tour tour = getTour(connection, rs, priceStart, realPriceWithinDiscounts, categories, specialOffer);
-				tours.add(tour);				
+				tours.add(tour);
 			}
 			return tours;
 		} catch (SQLException e) {

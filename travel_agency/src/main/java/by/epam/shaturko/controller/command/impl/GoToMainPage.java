@@ -56,6 +56,7 @@ public class GoToMainPage implements Command {
 		ServiceGettingData serviceGettingData = provider.getServiceGettingData();
 		try {
 			List<String> listOfCountriesNames = serviceGettingData.getListOfCountriesNames();
+			listOfCountriesNames.add(ANY);
 			session.setAttribute(SessionAttribute.REQUEST_URL, Constant.URL_TO_MAIN_PAGE);
 			session.setAttribute(SessionAttribute.DURATIONS, listOfDurations);
 			session.setAttribute(SessionAttribute.FOOD, TypeOfFood.values());

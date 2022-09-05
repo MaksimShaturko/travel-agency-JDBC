@@ -65,7 +65,7 @@
 	var="message_write" />
 <fmt:message bundle="${loc}" key="tour_page.message_send"
 	var="message_send" />
-	<fmt:message bundle="${loc}" key="spec.title_invalid"
+<fmt:message bundle="${loc}" key="spec.title_invalid"
 	var="title_invalid" />
 <fmt:message bundle="${loc}" key="spec.description_invalid"
 	var="desc_invalid" />
@@ -75,17 +75,18 @@
 	var="discount_invalid" />
 <fmt:message bundle="${loc}" key="spec.parameters_and_discount_invalid"
 	var="params_and_discount_invalid" />
-	<fmt:message bundle="${loc}" key="spec.choose_so_from_list"
+<fmt:message bundle="${loc}" key="spec.choose_so_from_list"
 	var="choose_from_list" />
 <fmt:message bundle="${loc}" key="spec.create_for_list_or_create"
 	var="create_for_list" />
 <fmt:message bundle="${loc}" key="spec.or" var="orr" />
 <fmt:message bundle="${loc}" key="tours_page.create_and_apply"
 	var="create_and_apply" />
-	<fmt:message bundle="${loc}" key="spec.title" var="spec_title" />
+<fmt:message bundle="${loc}" key="spec.title" var="spec_title" />
 <fmt:message bundle="${loc}" key="spec.description" var="spec_desc" />
 <fmt:message bundle="${loc}" key="spec.discount" var="spec_disc" />
 <fmt:message bundle="${loc}" key="tours_page.apply" var="apply" />
+<fmt:message bundle="${loc}" key="tour_page.you" var="you" />
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -224,7 +225,7 @@
 
 		<c:if
 			test="${!requestScope.freeTour || (requestScope.freeTour && sessionScope.user.role=='ADMIN')}">
-			<c:if test="${!sessionScope.messages==null}">
+			<c:if test="${!(sessionScope.messages==null)}">
 				<table border="1">
 					<tr>
 						<td>${message_datetime}</td>
@@ -238,7 +239,7 @@
 								<c:if test="${message.user.role == 'CLIENT'}">
 									<c:if test="${sessionScope.user.id == message.user.id}">
 										<td>${sessionScope.user.details.name}
-											${sessionScope.user.details.surname} (Вы)</td>
+											${sessionScope.user.details.surname} (${you})</td>
 									</c:if>
 									<c:if test="${sessionScope.user.id != message.user.id}">
 										<td>${sessionScope.user.details.name}</td>
@@ -275,7 +276,7 @@
 				<div class="into-main-div-so">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="create_special_offer" />
-						<input type="hidden" name="tourId" value="${param.tourId}"/>
+						<input type="hidden" name="tourId" value="${param.tourId}" />
 						<div class="main-text-so">${choose_from_list}:</div>
 						<select name="specialOffer">
 							<c:forEach items="${sessionScope.specialOffers}" var="so">
@@ -289,7 +290,7 @@
 					<div class="title-so">${create_for_list}</div>
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="create_special_offer" />
-						<input type="hidden" name="tourId" value="${param.tourId}"/>
+						<input type="hidden" name="tourId" value="${param.tourId}" />
 						<div class="main-text-so">${spec_title}</div>
 						<input type="text" name="title" value="${parameters['title']}"
 							minlength="5" maxlength="50" />

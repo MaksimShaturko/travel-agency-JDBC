@@ -74,6 +74,7 @@ public class GetChosenTours implements Command {
 		requestParameters.put(RequestParameter.DEPARTURE_DATE, dateOfDeparture);
 		requestParameters.put(RequestParameter.PRICE_FROM, priceFrom);
 		requestParameters.put(RequestParameter.PRICE_TO, priceTo);
+		requestParameters.put(RequestParameter.ONLY_SO, request.getParameter(RequestParameter.ONLY_SO));
 		User user = (User) session.getAttribute(SessionAttribute.USER);
 		try {
 			List<Tour> toursList = SERVICE_GETTING_DATA.getListOfChosenTours(requestParameters, user);

@@ -55,6 +55,8 @@
 	var="choose_rest" />
 <fmt:message bundle="${loc}" key="main_page.number_of_people"
 	var="number_of_people" />
+<fmt:message bundle="${loc}" key="main_page.only_with_so"
+	var="only_with_so" />
 <fmt:message bundle="${loc}" key="main_user_page.user_ordered_tours"
 	var="user_ordered_tours" />
 <fmt:message bundle="${loc}" key="main_user_page.user_visited_tours"
@@ -62,7 +64,6 @@
 <fmt:message bundle="${loc}" key="main_user_page.title" var="user_title" />
 <fmt:message bundle="${loc}" key="main_guest_page.title"
 	var="guest_title" />
-
 <fmt:message bundle="${loc}" key="tours_page.location" var="location" />
 <fmt:message bundle="${loc}" key="tour_page.hotel_image"
 	var="hotel_image" />
@@ -89,6 +90,8 @@
 	var="price_with_discounts" />
 <fmt:message bundle="${loc}" key="message.special_for_today"
 	var="special_for_today" />
+<fmt:message bundle="${loc}" key="tours_page.order_tour"
+	var="order_tour" />
 
 <html>
 <head>
@@ -207,13 +210,14 @@ ${guest_title}</c:if> <c:if test="${auth}">
 				</c:forEach>
 			</div> 
 			--%>
-							<input class="auth-input-submit" type="submit"
-								value="${select_tour}" />
+			<br>
+							<input type="checkbox" name="onlySO"
+								value="Yes"> ${only_with_so} <input class="auth-input-submit"
+								type="submit" value="${select_tour}" />
 						</form>
 					</div>
 				</div>
 			</div>
-
 ${special_for_today}
 			<div class="main-div-tours">
 				<table border="1">
