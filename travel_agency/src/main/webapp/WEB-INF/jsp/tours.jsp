@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.local" var="loc"></fmt:setBundle>
@@ -94,88 +95,117 @@ ${title_visited}
 	<div class="main-div-tours">
 
 		<c:if test="${sessionScope.toursRequest == 'ordered'}">
-			<table border="1">
-				<tr>
-					<td>${location}</td>
-					<td>${hotel_image}</td>
-					<td>${start_date}</td>
-					<td>${return_date}</td>
-					<td>${stars}</td>
-					<td>${room}</td>
-					<td>${food}</td>
-					<td>${placement}</td>
-					<td>${purchase_price}<br>
-					<button class="button-scroll-page"
-							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=up'">
-							&#129045;</button>
-						<button class="button-scroll-page"
-							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=down'">
-							&#129047;</button></td>					
-				</tr>
-				<c:forEach items="${requestScope.toursOnPage}" var="tour">
-					<form action="Controller" method="post">
-						<input type="hidden" name="command" value="view_tour" /> <input
-							type="hidden" name="tourId" value="${tour.id}" />
-						<tr>
-							<td>${just_country}:${tour.hotel.city.country.name}<br>
-								${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
-								${tour.hotel.name}
-							</td>
-							<td><img
-								style="object-fit: cover; height: 200px; width: 250px"
-								src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
-								alt="${tour.hotel.description}" /></td>
-							<td>${tour.dateOfDeparture}</td>
-							<td>${tour.dateOfReturn}</td>
-							<td>${tour.hotel.stars}</td>
-							<td>${tour.room}</td>
-							<td>${tour.food}</td>
-							<td>${tour.placement}</td>
-							<td>${tour.realPrice}</td>
-							<td><input class="button-discount" type="submit"
-								value="${open_tour}" /></td>
-					</form>
-					<c:if test="${sessionScope.role == 'ADMIN' }">
-						<td><form action="Controller" method="post">
-								<input type="hidden" name="command" value="set_tour_as_visited" />
-								<input type="hidden" name="tourId" value="${tour.id}" />
-								<td><input class="button-discount" type="submit"
-									value="${mark_as_visited}" /></td>
-							</form></td>
-					</c:if>
+
+				<table border="1">
+					<tr>
+						<td>${location}</td>
+						<td>${hotel_image}</td>
+						<td>${start_date}</td>
+						<td>${return_date}</td>
+						<td>${stars}</td>
+						<td>${room}</td>
+						<td>${food}</td>
+						<td>${placement}</td>
+						<td>${purchase_price}<br>
+							<button class="button-scroll-page"
+								onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=up'">
+								&#129045;</button>
+							<button class="button-scroll-page"
+								onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=down'">
+								&#129047;</button></td>
 					</tr>
-				</c:forEach>
-			</table>
-		</c:if>
-
-		<c:if test="${sessionScope.toursRequest == 'chosen'}">
-
-			<table border="1">
-				<tr>
-					<td>${location}</td>
-					<td>${hotel_image}</td>
-					<td>${stars}</td>
-					<td>${start_date}</td>
-					<td>${return_date}</td>
-					<td>${room}</td>
-					<td>${food}</td>
-					<td>${placement}</td>
-					<td>${start_price}</td>
-					<td>${so_discount}</td>
-					<td>${user_discount}</td>
-					<td>${price_with_discounts}<br>
-					<button class="button-scroll-page"
-							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=up'">
-							&#129045;</button>
-						<button class="button-scroll-page"
-							onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=down'">
-							&#129047;</button></td>
-				</tr>
-				<c:forEach items="${requestScope.toursOnPage}" var="tour">
-					<c:if test="${sessionScope.role == 'ADMIN' }">
+					<c:forEach items="${requestScope.toursOnPage}" var="tour">
 						<form action="Controller" method="post">
 							<input type="hidden" name="command" value="view_tour" /> <input
 								type="hidden" name="tourId" value="${tour.id}" />
+							<tr>
+								<td>${just_country}:${tour.hotel.city.country.name}<br>
+									${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+									${tour.hotel.name}
+								</td>
+								<td><img
+									style="object-fit: cover; height: 200px; width: 250px"
+									src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+									alt="${tour.hotel.description}" /></td>
+								<td>${tour.dateOfDeparture}</td>
+								<td>${tour.dateOfReturn}</td>
+								<td>${tour.hotel.stars}</td>
+								<td>${tour.room}</td>
+								<td>${tour.food}</td>
+								<td>${tour.placement}</td>
+								<td>${tour.realPrice}</td>
+								<td><input class="button-discount" type="submit"
+									value="${open_tour}" /></td>
+						</form>
+						<c:if test="${sessionScope.role == 'ADMIN' }">
+							<td><form action="Controller" method="post">
+									<input type="hidden" name="command" value="set_tour_as_visited" />
+									<input type="hidden" name="tourId" value="${tour.id}" />
+									<td><input class="button-discount" type="submit"
+										value="${mark_as_visited}" /></td>
+								</form></td>
+						</c:if>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+
+
+		<c:if test="${sessionScope.toursRequest == 'chosen'}">
+			<c:if test="${fn:length(sessionScope.toursList)>0}">
+				<table border="1">
+					<tr>
+						<td>${location}</td>
+						<td>${hotel_image}</td>
+						<td>${stars}</td>
+						<td>${start_date}</td>
+						<td>${return_date}</td>
+						<td>${room}</td>
+						<td>${food}</td>
+						<td>${placement}</td>
+						<td>${start_price}</td>
+						<td>${so_discount}</td>
+						<td>${user_discount}</td>
+						<td>${price_with_discounts}<br>
+							<button class="button-scroll-page"
+								onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=up'">
+								&#129045;</button>
+							<button class="button-scroll-page"
+								onclick="window.location.href = 'Controller?command=go_to_tours_page&sort=down'">
+								&#129047;</button></td>
+					</tr>
+					<c:forEach items="${requestScope.toursOnPage}" var="tour">
+						<c:if test="${sessionScope.role == 'ADMIN' }">
+							<form action="Controller" method="post">
+								<input type="hidden" name="command" value="view_tour" /> <input
+									type="hidden" name="tourId" value="${tour.id}" />
+								<tr>
+									<td>${just_country}:${tour.hotel.city.country.name}<br>
+										${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+										${tour.hotel.name}
+									</td>
+									<td><img
+										style="object-fit: cover; height: 200px; width: 250px"
+										src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+										alt="${tour.hotel.description}" /></td>
+									<td>${tour.hotel.stars}</td>
+									<td>${tour.dateOfDeparture}</td>
+									<td>${tour.dateOfReturn}</td>
+									<td>${tour.room}</td>
+									<td>${tour.food}</td>
+									<td>${tour.placement}</td>
+									<td>${tour.priceStart}</td>
+									<td>${tour.specialOffer.discount}</td>
+									<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
+									<td>${tour.realPrice}</td>
+									<c:if test="${sessionScope.role == 'CLIENT' }">
+									</c:if>
+									<td><input class="button-discount" type="submit"
+										value="${open_tour}" /></td>
+								</tr>
+							</form>
+						</c:if>
+						<c:if test="${sessionScope.role == 'CLIENT' }">
 							<tr>
 								<td>${just_country}:${tour.hotel.city.country.name}<br>
 									${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
@@ -195,50 +225,23 @@ ${title_visited}
 								<td>${tour.specialOffer.discount}</td>
 								<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
 								<td>${tour.realPrice}</td>
-								<c:if test="${sessionScope.role == 'CLIENT' }">
-								</c:if>
-								<td><input class="button-discount" type="submit"
-									value="${open_tour}" /></td>
+								<td><form action="Controller" method="post">
+										<input type="hidden" name="command" value="order_tour" /> <input
+											type="hidden" name="tourId" value="${tour.id}" /> <input
+											class="button-discount" type="submit" value="${order_tour}" />
+									</form> <br>
+									<form action="Controller" method="post">
+										<input type="hidden" name="command" value="view_tour" /> <input
+											type="hidden" name="tourId" value="${tour.id}" /> <input
+											class="button-discount" type="submit" value="${open_tour}" />
+									</form></td>
 							</tr>
-						</form>
-					</c:if>
-					<c:if test="${sessionScope.role == 'CLIENT' }">
-						<tr>
-							<td>${just_country}:${tour.hotel.city.country.name}<br>
-								${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
-								${tour.hotel.name}
-							</td>
-							<td><img
-								style="object-fit: cover; height: 200px; width: 250px"
-								src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
-								alt="${tour.hotel.description}" /></td>
-							<td>${tour.hotel.stars}</td>
-							<td>${tour.dateOfDeparture}</td>
-							<td>${tour.dateOfReturn}</td>
-							<td>${tour.room}</td>
-							<td>${tour.food}</td>
-							<td>${tour.placement}</td>
-							<td>${tour.priceStart}</td>
-							<td>${tour.specialOffer.discount}</td>
-							<td>${user.details.loyalityDiscount + user.details.agencyAdditionalDiscount}</td>
-							<td>${tour.realPrice}</td>
-							<td><form action="Controller" method="post">
-									<input type="hidden" name="command" value="order_tour" /> <input
-										type="hidden" name="tourId" value="${tour.id}" /> <input
-										class="button-discount" type="submit" value="${order_tour}" />
-								</form> <br>
-								<form action="Controller" method="post">
-									<input type="hidden" name="command" value="view_tour" /> <input
-										type="hidden" name="tourId" value="${tour.id}" /> <input
-										class="button-discount" type="submit" value="${open_tour}" />
-								</form></td>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</table>
+						</c:if>
+					</c:forEach>
+				</table>
 
 
-
+			</c:if>
 
 		</c:if>
 

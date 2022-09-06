@@ -213,7 +213,7 @@
 			<form action="Controller" method="post">
 				<input type="hidden" name="command" value="order_tour" /> <input
 					type="hidden" name="tourId" value="${sessionScope.orderedTour.id}" />
-				<input type="submit" value="${order}" />
+				<input class="auth-input-submit" type="submit" value="${order}" />
 			</form>
 		</c:if>
 

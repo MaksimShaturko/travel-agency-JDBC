@@ -502,6 +502,27 @@ body {
 	margin-right: auto;
 }
 
+.auth-input-submit {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	background-color: #FF8694;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.auth-input-submit:hover {
+	background-color: #BF4452;
+	cursor: pointer;
+	font: inherit;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .auth-form .auth-input-submit:hover {
 	background-color: #BF4452;
 	cursor: pointer;

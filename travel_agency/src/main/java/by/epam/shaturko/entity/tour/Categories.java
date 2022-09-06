@@ -7,7 +7,6 @@ public enum Categories {
 	CRUISE,
 	TREATMENT,
 	SAFARI,
-	DIVING,
-	ANY;
+	DIVING;
 }
 
