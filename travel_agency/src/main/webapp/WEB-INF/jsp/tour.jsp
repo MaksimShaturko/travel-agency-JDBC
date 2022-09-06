@@ -328,8 +328,8 @@
 				<form action="Controller" method="post">
 					<input type="hidden" name="command" value="write_message" /> <input
 						type="hidden" name="tourId" value="${sessionScope.orderedTour.id}" />
-					<input type="text" name="messageText" size="200" /> <input
-						type="submit" value="${message_send}" />
+					<input type="text" name="messageText" size="100" /><br><input class="button-discount"
+						type="submit" value="${message_send}" /><br>
 				</form>
 			</c:if>
 		</c:if>

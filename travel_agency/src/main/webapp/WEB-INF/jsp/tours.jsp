@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.local" var="loc"></fmt:setBundle>
@@ -77,6 +77,8 @@
 	var="title_visited" />
 <fmt:message bundle="${loc}" key="tours_page.sort_by_price"
 	var="sort_by_price" />
+<fmt:message bundle="${loc}" key="tours_page.no_tours"
+	var="no_tours" />
 <html>
 <head>
 <meta charset="UTF-8">
@@ -93,9 +95,8 @@ ${title_visited}
 		<jsp:include page="header.jsp" />
 	</header>
 	<div class="main-div-tours">
-
-		<c:if test="${sessionScope.toursRequest == 'ordered'}">
-
+		<c:if test="${fn:length(sessionScope.toursList)>0}">
+			<c:if test="${sessionScope.toursRequest == 'ordered'}">
 				<table border="1">
 					<tr>
 						<td>${location}</td>
@@ -150,9 +151,8 @@ ${title_visited}
 				</table>
 			</c:if>
 
+			<c:if test="${sessionScope.toursRequest == 'chosen'}">
 
-		<c:if test="${sessionScope.toursRequest == 'chosen'}">
-			<c:if test="${fn:length(sessionScope.toursList)>0}">
 				<table border="1">
 					<tr>
 						<td>${location}</td>
@@ -241,119 +241,124 @@ ${title_visited}
 				</table>
 
 
+
+
 			</c:if>
 
-		</c:if>
-
-		<c:if test="${sessionScope.toursRequest == 'visited'}">
-			<table border="1">
-				<tr>
-					<td>${location}</td>
-					<td>${hotel_image}</td>
-					<td>${stars}</td>
-					<td>${start_date}</td>
-					<td>${return_date}</td>
-					<td>${room}</td>
-					<td>${food}</td>
-					<td>${placement}</td>
-				</tr>
-				<c:forEach items="${requestScope.toursOnPage}" var="tour">
+			<c:if test="${sessionScope.toursRequest == 'visited'}">
+				<table border="1">
 					<tr>
-						<td>${just_country}:${tour.hotel.city.country.name}<br>
-							${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
-							${tour.hotel.name}
-						</td>
-						<td><img
-							style="object-fit: cover; height: 200px; width: 250px"
-							src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
-							alt="${tour.hotel.description}" /></td>
-						<td>${tour.hotel.stars}</td>
-						<td>${tour.dateOfDeparture}</td>
-						<td>${tour.dateOfReturn}</td>
-						<td>${tour.room}</td>
-						<td>${tour.food}</td>
-						<td>${tour.placement}</td>
+						<td>${location}</td>
+						<td>${hotel_image}</td>
+						<td>${stars}</td>
+						<td>${start_date}</td>
+						<td>${return_date}</td>
+						<td>${room}</td>
+						<td>${food}</td>
+						<td>${placement}</td>
 					</tr>
-				</c:forEach>
-			</table>
-		</c:if>
-
-		<div class="pagination">
-			<c:if test="${requestScope.previous != null}">
-				<button class="button-scroll-page"
-					onclick="window.location.href = 'Controller?command=go_to_tours_page&pageNumber=${requestScope.pageNumber - 1}'"><</button>
+					<c:forEach items="${requestScope.toursOnPage}" var="tour">
+						<tr>
+							<td>${just_country}:${tour.hotel.city.country.name}<br>
+								${just_city}: ${tour.hotel.city.name}<br> ${just_hotel}:
+								${tour.hotel.name}
+							</td>
+							<td><img
+								style="object-fit: cover; height: 200px; width: 250px"
+								src="${request.getContext}/travel_agency/images/hotels/${tour.hotel.image}"
+								alt="${tour.hotel.description}" /></td>
+							<td>${tour.hotel.stars}</td>
+							<td>${tour.dateOfDeparture}</td>
+							<td>${tour.dateOfReturn}</td>
+							<td>${tour.room}</td>
+							<td>${tour.food}</td>
+							<td>${tour.placement}</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>
-			${requestScope.pageNumber}
-			<c:if test="${requestScope.next != null}">
-				<button class="button-scroll-page"
-					onclick="window.location.href = 'Controller?command=go_to_tours_page&pageNumber=${requestScope.pageNumber + 1}'">></button>
-			</c:if>
-		</div>
+
+			<div class="pagination">
+				<c:if test="${requestScope.previous != null}">
+					<button class="button-scroll-page"
+						onclick="window.location.href = 'Controller?command=go_to_tours_page&pageNumber=${requestScope.pageNumber - 1}'"><</button>
+				</c:if>
+				${requestScope.pageNumber}
+				<c:if test="${requestScope.next != null}">
+					<button class="button-scroll-page"
+						onclick="window.location.href = 'Controller?command=go_to_tours_page&pageNumber=${requestScope.pageNumber + 1}'">></button>
+				</c:if>
+			</div>
 
 
-		<c:if test="${sessionScope.toursRequest == 'chosen'}">
-			<c:if test="${sessionScope.role == 'ADMIN'}">
-				<br>
-				<div class="into-main-div-so">
-					<c:if test="${param.message=='messageNoCountries'}">
+			<c:if test="${sessionScope.toursRequest == 'chosen'}">
+				<c:if test="${sessionScope.role == 'ADMIN'}">
+					<br>
+					<div class="into-main-div-so">
+						<c:if test="${param.message=='messageNoCountries'}">
 					${no_countries}
 			</c:if>
-					<form action="Controller" method="post">
-						<input type="hidden" name="command" value="create_special_offer" />
-						<div class="main-text-so">${choose_from_list}:</div>
-						<select name="specialOffer">
-							<c:forEach items="${sessionScope.specialOffers}" var="so">
-								<option>${so.title}</option>
-							</c:forEach>
-						</select> <input class="so-button-apply" type="submit" name="applySO"
-							value="${apply}" />
-					</form>
-				</div>
-				<div class="into-main-div-so-2">
-					<div class="title-so">${create_for_list}</div>
-					<form action="Controller" method="post">
-						<input type="hidden" name="command" value="create_special_offer" />
-						<div class="main-text-so">${spec_title}</div>
-						<input type="text" name="title" value="${parameters['title']}"
-							minlength="5" maxlength="50" />
-						<div class="main-text-so">${spec_desc}</div>
-						<input type="text" name="description"
-							value="${parameters['description']}" minlength="5"
-							maxlength="1000" />
-						<div class="main-text-so">${spec_disc}</div>
-						<input type="number" name="discount"
-							value="${parameters['discount']}" min="1" max="99" />
-						<div class="message-so">
-							<c:if test="${param.message=='titleInvalid'}">
+						<form action="Controller" method="post">
+							<input type="hidden" name="command" value="create_special_offer" />
+							<div class="main-text-so">${choose_from_list}:</div>
+							<select name="specialOffer">
+								<c:forEach items="${sessionScope.specialOffers}" var="so">
+									<option>${so.title}</option>
+								</c:forEach>
+							</select> <input class="so-button-apply" type="submit" name="applySO"
+								value="${apply}" />
+						</form>
+					</div>
+					<div class="into-main-div-so-2">
+						<div class="title-so">${create_for_list}</div>
+						<form action="Controller" method="post">
+							<input type="hidden" name="command" value="create_special_offer" />
+							<div class="main-text-so">${spec_title}</div>
+							<input type="text" name="title" value="${parameters['title']}"
+								minlength="5" maxlength="50" />
+							<div class="main-text-so">${spec_desc}</div>
+							<input type="text" name="description"
+								value="${parameters['description']}" minlength="5"
+								maxlength="1000" />
+							<div class="main-text-so">${spec_disc}</div>
+							<input type="number" name="discount"
+								value="${parameters['discount']}" min="1" max="99" />
+							<div class="message-so">
+								<c:if test="${param.message=='titleInvalid'}">
 				${title_invalid}
 			</c:if>
-							<c:if test="${param.message=='descriptionInvalid'}">
+								<c:if test="${param.message=='descriptionInvalid'}">
 					${desc_invalid}
 			</c:if>
-							<c:if test="${param.message=='parametersInvalid'}">
+								<c:if test="${param.message=='parametersInvalid'}">
 					${params_invalid}
 			</c:if>
-							<c:if test="${param.message=='discountInvalid'}">
+								<c:if test="${param.message=='discountInvalid'}">
 					${discount_invalid}
 			</c:if>
-							<c:if test="${param.message=='parameters_and_discountInvalid'}">
+								<c:if test="${param.message=='parameters_and_discountInvalid'}">
 					${params_and_discount_invalid}
 			</c:if>
-						</div>
-						<input class="so-button-2" type="submit"
-							value="${create_and_apply}" /><br>
-					</form>
-				</div>
+							</div>
+							<input class="so-button-2" type="submit"
+								value="${create_and_apply}" /><br>
+						</form>
+					</div>
+				</c:if>
 			</c:if>
-		</c:if>
 
 
 
-		<c:if test="${sessionScope.toursRequest == 'isEmpty'}">
+			<c:if test="${sessionScope.toursRequest == 'isEmpty'}">
 	${message_no_tours}
 	</c:if>
+		</c:if>
+		<c:if test="${!(fn:length(sessionScope.toursList)>0)}">
+			<div class="text">
+				<h3>${no_tours}</h3>
+			</div>
+		</c:if>
 	</div>
-
 	<footer>
 		<jsp:include page="footer.jsp" />
 	</footer>
